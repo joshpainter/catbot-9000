@@ -1,6 +1,6 @@
 # catbot-9000
 
-catbot-9000 is a javascript market-loser bot running on node.js. It was used during the [CATMOS](https://catmos.io) launch event on [Hashgreen](https://hash.green). It uses custom client libraries to talk to Hashgreen's [API endpoint](https://docs.hash.green/trading-api), Chia's [RPC endpoint](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/rpc/wallet_rpc_api.py) and of course ICanHazDadJoke's simple GET endpoint. For Discord integration, it uses the excellent and simple discord-webhook-node [client library](https://www.npmjs.com/package/discord-webhook-node).
+catbot-9000 is a javascript market-loser bot running on node.js. It was used during the [CATMOS](https://catmos.io) launch event on [Hashgreen](https://hash.green). It uses custom client libraries to talk to Hashgreen's [API endpoint](https://docs.hash.green/trading-api), Chia's [RPC endpoint](https://github.com/Chia-Network/chia-blockchain/blob/main/chia/rpc/wallet_rpc_api.py) and of course ICanHazDadJoke's [simple GET endpoint](https://icanhazdadjoke.com/api). For Discord integration, it uses the excellent and simple discord-webhook-node [client library](https://www.npmjs.com/package/discord-webhook-node).
 
 The credit behind the Chia RPC javascript library goes to [OfferPool](https://github.com/offerpool/offerpool/blob/main/backend/utils/get-offer-summary.js). This code was instrumental for me to understand how to connect securely to the RPC endpoint using the wallet's SSL certificates.
 
