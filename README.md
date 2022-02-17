@@ -11,6 +11,7 @@ I didn't use all of the methods in the custom clients, but I went ahead and buil
 catbot-9000
 │   README.md  <-- You are here
 │   app.js  <-- Main bot code    
+│   .env.example  <-- copy/rename to .env and upate your settings
 │
 └───api-clients
 │   │   hashgreen-client.js  <-- Hashgreen API
