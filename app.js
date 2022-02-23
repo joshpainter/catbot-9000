@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { Webhook } = require('discord-webhook-node');
-const { getMarkets, getOrderBook, getTradeStatistics, getMyOrders, uploadMyOrder, cancelMyOrder } = require("./api_clients/hashgreen-client");
+const { getOrderBook, uploadMyOrder} = require("./api_clients/hashgreen-client");
 const { getDadJoke } = require("./api_clients/icanhazdadjoke-client");
-const { getOfferSummary, getOfferValidity, createOffer } = require("./api_clients/wallet-rpc-client");
+const { createOffer } = require("./api_clients/wallet-rpc-client");
 
 const processOrders = async () => {
 
