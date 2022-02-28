@@ -1,4 +1,4 @@
-const { spacescanGetCatsApi } = require('./spacescanClient');
+const { spacescanGetCatsApi } = require('./SpacescanClient');
 jest.setTimeout(10000);
 
 test('fetches spacescanGetCatsApi', async () => {

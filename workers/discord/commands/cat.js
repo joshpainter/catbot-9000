@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { configureCatEmbeds } = require('../templates/configureCatEmbeds');
-const { getDadJoke } = require('../../../api_clients/iCanHazDadJokeClient');
+const { getDadJoke } = require('../../../api_clients/ICanHazDadJokeClient');
 const { tokenController } = require('../../../controllers/tokenController');
 const { configureCatComponents } = require('../templates/configureCatComponents');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');

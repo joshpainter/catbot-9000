@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const { spacescanGetCatsApi } = require('../api_clients/spacescanClient');
-const { tailDatabaseGetTails } = require('../api_clients/tailDatabaseClient');
-const { xchtokenGetTokenApi } = require('../api_clients/xchTokenClient');
+const { spacescanGetCatsApi } = require('../api_clients/SpacescanClient');
+const { tailDatabaseGetTails } = require('../api_clients/TailDatabaseClient');
+const { xchtokenGetTokenApi } = require('../api_clients/XchTokenClient');
 const { tokenModel } = require('../models/tokenModel');
 let cachedTokens = new Array();
 let cachedTokensLastUpdated = new Date();
@@ -51,6 +51,11 @@ class tokenController {
 		filteredTokens = _.union(filteredTokens, _.filter(tokens, token => token.symbol?.toLowerCase() == query.toLowerCase()));
 		filteredTokens = _.union(filteredTokens, _.filter(tokens, token => token.description?.toLowerCase().includes(query.toLowerCase()) || token.name?.toLowerCase().includes(query.toLowerCase())));
 		return filteredTokens;
+	}
+	async findByTail(tail) {
+		const tokens = await this.fetch();
+		const foundToken = _.find(tokens, token => token.tail?.toLowerCase() == tail?.toLowerCase());
+		return foundToken;
 	}
 }
 module.exports.tokenController = tokenController;
