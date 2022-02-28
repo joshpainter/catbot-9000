@@ -2,9 +2,10 @@ const { MessageActionRow, MessageButton } = require('discord.js');
 module.exports = {
 	name: 'configureCatComponents',
 	async configureCatComponents(interaction, selectedToken) {
-		const linksRow = new MessageActionRow();
+		const components = new Array();
+		const socialLinksRow = new MessageActionRow();
 		if (selectedToken.websiteUrl?.length) {
-			linksRow.addComponents(
+			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.websiteUrl)
@@ -13,7 +14,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.discordUrl?.length) {
-			linksRow.addComponents(
+			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.discordUrl)
@@ -22,7 +23,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.twitterUrl?.length) {
-			linksRow.addComponents(
+			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.twitterUrl)
@@ -31,7 +32,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.facebookUrl?.length) {
-			linksRow.addComponents(
+			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.facebookUrl)
@@ -40,7 +41,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.redditUrl?.length) {
-			linksRow.addComponents(
+			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.redditUrl)
@@ -49,7 +50,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.telegramUrl?.length) {
-			linksRow.addComponents(
+			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.telegramUrl)
@@ -57,15 +58,36 @@ module.exports = {
 					.setLabel('Telegram'),
 			);
 		}
-		if (selectedToken.needsSpacescanUpdate) {
-			linksRow.addComponents(
+		components.push(socialLinksRow);
+		const catApiLinksRow = new MessageActionRow();
+		if (selectedToken.importedFromTailDatabase) {
+			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(`https://www.spacescan.io/xch/catInfo?asset_id=${selectedToken.tail}`)
-					.setEmoji('<:spacescan:947781625431863306>')
-					.setLabel('Update details at spacescan.io'),
+					.setURL(`https://www.taildatabase.com/tail/${selectedToken.tail}`)
+					.setEmoji('<:taildb:947824406284083320>')
+					.setLabel('taildatabase.com'),
 			);
 		}
-		return linksRow.components.length ? [linksRow] : [];
+		if (selectedToken.importedFromXchToken) {
+			catApiLinksRow.addComponents(
+				new MessageButton()
+					.setStyle('LINK')
+					.setURL(`https://xchtoken.org/asset_token.php?ASSET_ID=${selectedToken.tail}`)
+					.setEmoji('<:xchtoken:947823964904882257>')
+					.setLabel('xchtoken.org'),
+			);
+		}
+		if (selectedToken.importedFromSpacescan) {
+			catApiLinksRow.addComponents(
+				new MessageButton()
+					.setStyle('LINK')
+					.setURL(`https://www.spacescan.io/xch/cat1/${selectedToken.tail}`)
+					.setEmoji('<:spacescan:947781625431863306>')
+					.setLabel('spacescan.io'),
+			);
+		}
+		components.push(catApiLinksRow);
+		return components;
 	},
 };

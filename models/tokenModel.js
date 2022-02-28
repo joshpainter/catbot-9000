@@ -2,6 +2,7 @@ const _ = require('lodash');
 class tokenModel {
 	mergeTailDatabaseData(tailDatabaseData) {
 		if (tailDatabaseData) {
+			this.importedFromTailDatabase = true;
 			this.name = tailDatabaseData.name;
 			this.tail = tailDatabaseData.hash;
 			this.symbol = tailDatabaseData.code;
@@ -14,6 +15,7 @@ class tokenModel {
 	}
 	mergeXchTokenData(xchTokenData) {
 		if (xchTokenData) {
+			this.importedFromXchToken = true;
 			this.name = xchTokenData.Name || this.name;
 			this.tail = xchTokenData.ASSET_ID || this.tail;
 			this.symbol = xchTokenData.Symbol || this.symbol;
@@ -34,6 +36,7 @@ class tokenModel {
 		if (spacescanData) {
 			this.needsSpacescanUpdate = spacescanData.symbol == null;
 			if (spacescanData.symbol != null) {
+				this.importedFromSpacescan = true;
 				this.name = spacescanData.asset_name || this.name;
 				this.tail = spacescanData.asset_id || this.tail;
 				this.symbol = spacescanData.symbol || this.symbol;
