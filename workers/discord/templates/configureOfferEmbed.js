@@ -1,5 +1,4 @@
-const { get_tail } = require('../../../api_clients/tailDatabaseClient');
-
+const { tokenController } = require('../../../controllers/tokenController');
 module.exports = {
 	name: 'configureOfferEmbed',
 	async configureOfferEmbed(interaction, embed, offerValidResult, offerSummaryResult) {
@@ -16,9 +15,10 @@ module.exports = {
 		const offered = Object.entries(offerSummaryResult.summary.offered);
 		const requested = Object.entries(offerSummaryResult.summary.requested);
 
+		const tc = new tokenController();
 		for (let index = 0; index < offered.length || index < requested.length; index++) {
 			if (index < requested.length) {
-				const requestedCatDetail = await get_tail(requested[index][0]);
+				const requestedCatDetail = await tc.findByTail(requested[index][0]);
 				const requestedCatMultiplier = requestedCatDetail.code == 'XCH' ? xchMultiplier : catMultiplier;
 				const requestedAmount = requested[index][1] / requestedCatMultiplier;
 				embed.addField(':outbox_tray: Requests', `${requestedAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${requestedCatDetail.code}`, true);
@@ -27,7 +27,7 @@ module.exports = {
 				embed.addField('\u200B', '\u200B');
 			}
 			if (index < offered.length) {
-				const offeredCatDetail = await get_tail(offered[index][0]);
+				const offeredCatDetail = await tc.findByTail(offered[index][0]);
 				const offeredCatMultiplier = offeredCatDetail.code == 'XCH' ? xchMultiplier : catMultiplier;
 				const offeredAmount = offered[index][1] / offeredCatMultiplier;
 				embed.addField('Offers :inbox_tray:', `${offeredAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${offeredCatDetail.code}`, true);

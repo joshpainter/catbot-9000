@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { getOfferSummary, getOfferValidity } = require('../../../api_clients/chiaWalletRpcClient');
+const { getOfferSummary, getOfferValidity } = require('../../../api_clients/ChiaWalletRpcClient');
 const { configureOfferEmbed } = require('../templates/configureOfferEmbed');
 
 module.exports = {
