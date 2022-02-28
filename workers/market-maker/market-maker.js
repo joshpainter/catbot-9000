@@ -1,6 +1,6 @@
 const { getOrderBook, uploadMyOrder } = require('../../api_clients/hashgreenClient');
 // const { getDadJoke } = require('../../../api_clients/icanhazdadjoke-client');
-const { createOffer } = require('../../api_clients/wallet-rpc-client');
+const { createOffer } = require('../../api_clients/chiaWalletRpcClient');
 
 const startMarketMaker = async () => {
 
