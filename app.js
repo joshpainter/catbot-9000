@@ -6,7 +6,7 @@ const { startMarketMaker } = require('./workers/market-maker/market-maker');
 
 const refreshTokenCache = async () => {
 	const tc = new tokenController();
-	tc.fetch();
+	tc.fetch(true);
 };
 
 const start = async () => {

@@ -1,4 +1,4 @@
-const { get_tail } = require('../../../api_clients/tail-database-client');
+const { get_tail } = require('../../../api_clients/tailDatabaseClient');
 
 module.exports = {
 	name: 'configureOfferEmbed',

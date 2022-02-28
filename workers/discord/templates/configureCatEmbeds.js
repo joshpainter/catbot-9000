@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const { getCachedTokensLastUpdated } = require('../../../controllers/tokenController');
 module.exports = {
 	name: 'configureCatEmbeds',
 	async configureCatEmbeds(interaction, token) {
@@ -15,8 +16,8 @@ module.exports = {
 			.setURL(`https://www.taildatabase.com/tail/${token.tail}`)
 			.setDescription(token.description ?? 'Unknown')
 			.setThumbnail(token.logoUrl)
-			.setFooter({ text: 'Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of' })
-			.setTimestamp()
+			.setFooter({ text: `Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${getCachedTokensLastUpdated().toLocaleString(interaction.locale, formatDateOptions)}` })
+			// .setTimestamp()
 			.setFields([])
 			.addField('TAIL', token.tail ?? 'Unknown', false);
 

@@ -1,11 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { get_tails } = require('../../../api_clients/tail-database-client');
 const { configureCatEmbeds } = require('../templates/configureCatEmbeds');
 const { getDadJoke } = require('../../../api_clients/icanhazdadjoke-client');
 const { tokenController } = require('../../../controllers/tokenController');
 const { configureCatComponents } = require('../templates/configureCatComponents');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('cat')
@@ -18,11 +16,9 @@ module.exports = {
 	async execute(interaction) {
 		const query = interaction.options.getString('search');
 		console.info(`/cat search ${query}`);
-		const catDetails = await get_tails();
-
 		const tc = new tokenController();
+		const allTokens = await tc.fetch();
 		const tokens = await tc.search(query);
-
 		if (!tokens.length) {
 			const dadJoke = await getDadJoke();
 			await interaction.reply(`Couldn't find \`\`${query}\`\`, sorry! Would a joke cheer you up? Yeah? Ok! ${dadJoke.joke}`);
@@ -55,9 +51,8 @@ module.exports = {
 				}
 				catComponents.push(row);
 			}
-
 			await interaction.reply({
-				content:`Sifting through ${catDetails.length} CATS to find \`\`${query}\`\`, one sec...`,
+				content:`Sifting through ${allTokens.length} CATS to find \`\`${query}\`\`, one sec...`,
 				embeds:catEmbeds,
 				components:catComponents,
 			});
