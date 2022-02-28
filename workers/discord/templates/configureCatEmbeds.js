@@ -13,11 +13,10 @@ module.exports = {
 		embed
 			.setColor('#57c776')
 			.setTitle(`${token.name} (${token.symbol})`)
-			.setURL(`https://www.taildatabase.com/tail/${token.tail}`)
+			.setURL(`https://www.spacescan.io/xch/cat1/${token.tail}`)
 			.setDescription(token.description ?? 'Unknown')
 			.setThumbnail(token.logoUrl)
 			.setFooter({ text: `Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${getCachedTokensLastUpdated().toLocaleString(interaction.locale, formatDateOptions)}` })
-			// .setTimestamp()
 			.setFields([])
 			.addField('TAIL', token.tail ?? 'Unknown', false);
 
