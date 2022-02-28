@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { get_tails } = require('../../../api_clients/tailDatabaseClient');
 const { configureCatEmbed } = require('../templates/configureCatEmbeds');
-const { getDadJoke } = require('../../../api_clients/icanhazdadjoke-client');
+const { getDadJoke } = require('../../../api_clients/iCanHazDadJokeClient');
 const _ = require('lodash');
 
 module.exports = {
