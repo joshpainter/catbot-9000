@@ -3,9 +3,9 @@ module.exports = {
 	name: 'CatConfigureComponents',
 	async CatConfigureComponents(interaction, selectedToken) {
 		const components = new Array();
-		const socialLinksRow = new MessageActionRow();
+		const buttons = new Array();
 		if (selectedToken.websiteUrl) {
-			socialLinksRow.addComponents(
+			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.websiteUrl)
@@ -14,7 +14,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.discordUrl) {
-			socialLinksRow.addComponents(
+			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.discordUrl)
@@ -23,7 +23,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.twitterUrl) {
-			socialLinksRow.addComponents(
+			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.twitterUrl)
@@ -32,7 +32,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.facebookUrl) {
-			socialLinksRow.addComponents(
+			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.facebookUrl)
@@ -41,7 +41,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.redditUrl) {
-			socialLinksRow.addComponents(
+			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.redditUrl)
@@ -50,7 +50,7 @@ module.exports = {
 			);
 		}
 		if (selectedToken.telegramUrl) {
-			socialLinksRow.addComponents(
+			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
 					.setURL(selectedToken.telegramUrl)
@@ -58,8 +58,21 @@ module.exports = {
 					.setLabel('Telegram'),
 			);
 		}
-		if (socialLinksRow.components.length) {
-			components.push(socialLinksRow);
+		const socialLinksRow1 = new MessageActionRow();
+		const socialLinksRow2 = new MessageActionRow();
+		for (const button of buttons) {
+			if (socialLinksRow1.components.length < 3) {
+				socialLinksRow1.addComponents(button);
+			}
+			else {
+				socialLinksRow2.addComponents(button);
+			}
+		}
+		if (socialLinksRow1.components.length) {
+			components.push(socialLinksRow1);
+		}
+		if (socialLinksRow2.components.length) {
+			components.push(socialLinksRow2);
 		}
 		const catApiLinksRow = new MessageActionRow();
 		if (selectedToken.importedFromTailDatabase) {
