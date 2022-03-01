@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { get_tails } = require('../../../api_clients/TailDatabaseClient');
-const { configureCatEmbed } = require('../templates/configureCatEmbeds');
+const { configureCatEmbed } = require('../templates/CatConfigureEmbeds');
 const { getDadJoke } = require('../../../api_clients/ICanHazDadJokeClient');
 const _ = require('lodash');
 

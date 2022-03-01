@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 const { TokenController } = require('../../../controllers/TokenController');
-const { configureCatComponents } = require('../templates/configureCatComponents');
-const { configureCatEmbeds } = require('../templates/configureCatEmbeds');
+const { CatConfigureComponents } = require('../templates/CatConfigureComponents');
+const { CatConfigureEmbeds } = require('../templates/CatConfigureEmbeds');
 
 module.exports = {
 	name: 'interactionCreate',
@@ -15,8 +15,8 @@ module.exports = {
 			const selectedTokens = await tc.search(selected.symbol);
 			const selectedToken = selectedTokens[0];
 
-			const catEmbeds = await configureCatEmbeds(interaction, selectedToken);
-			const catComponents = await configureCatComponents(interaction, selectedToken);
+			const catEmbeds = await CatConfigureEmbeds(interaction, selectedToken);
+			const catComponents = await CatConfigureComponents(interaction, selectedToken);
 			if (tokens.length > 1) {
 				const row = new MessageActionRow()
 					.addComponents(

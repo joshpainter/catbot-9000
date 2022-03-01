@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
 module.exports = {
-	name: 'configureCatComponents',
-	async configureCatComponents(interaction, selectedToken) {
+	name: 'CatConfigureComponents',
+	async CatConfigureComponents(interaction, selectedToken) {
 		const components = new Array();
 		const socialLinksRow = new MessageActionRow();
 		if (selectedToken.websiteUrl) {

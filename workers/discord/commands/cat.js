@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { configureCatEmbeds } = require('../templates/configureCatEmbeds');
+const { CatConfigureEmbeds } = require('../templates/CatConfigureEmbeds');
 const { getDadJoke } = require('../../../api_clients/ICanHazDadJokeClient');
 const { TokenController } = require('../../../controllers/TokenController');
-const { configureCatComponents } = require('../templates/configureCatComponents');
+const { CatConfigureComponents } = require('../templates/CatConfigureComponents');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -25,8 +25,8 @@ module.exports = {
 		}
 		else {
 			const selectedToken = tokens[0];
-			const catEmbeds = await configureCatEmbeds(interaction, selectedToken);
-			const catComponents = await configureCatComponents(interaction, selectedToken);
+			const catEmbeds = await CatConfigureEmbeds(interaction, selectedToken);
+			const catComponents = await CatConfigureComponents(interaction, selectedToken);
 			if (tokens.length > 1) {
 				const row = new MessageActionRow()
 					.addComponents(

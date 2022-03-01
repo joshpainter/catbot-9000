@@ -1,7 +1,7 @@
 const { TokenController } = require('../../../controllers/TokenController');
 module.exports = {
-	name: 'configureOfferEmbed',
-	async configureOfferEmbed(interaction, embed, offerValidResult, offerSummaryResult) {
+	name: 'OfferConfigureEmbeds',
+	async OfferConfigureEmbeds(interaction, embed, offerValidResult, offerSummaryResult) {
 		const catMultiplier = 1000;
 		const xchMultiplier = 1000000000000;
 		const formatNumberOptions = { minimumFractionDigits: 0, maximumFractionDigits: 2 };
@@ -18,19 +18,20 @@ module.exports = {
 		const tc = new TokenController();
 		for (let index = 0; index < offered.length || index < requested.length; index++) {
 			if (index < requested.length) {
+				console.info(requested[index][0]);
 				const requestedCatDetail = await tc.findByTail(requested[index][0]);
-				const requestedCatMultiplier = requestedCatDetail.code == 'XCH' ? xchMultiplier : catMultiplier;
+				const requestedCatMultiplier = requestedCatDetail.symbol == 'XCH' ? xchMultiplier : catMultiplier;
 				const requestedAmount = requested[index][1] / requestedCatMultiplier;
-				embed.addField(':outbox_tray: Requests', `${requestedAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${requestedCatDetail.code}`, true);
+				embed.addField(':outbox_tray: Requests', `${requestedAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${requestedCatDetail.symbol}`, true);
 			}
 			else {
 				embed.addField('\u200B', '\u200B');
 			}
 			if (index < offered.length) {
 				const offeredCatDetail = await tc.findByTail(offered[index][0]);
-				const offeredCatMultiplier = offeredCatDetail.code == 'XCH' ? xchMultiplier : catMultiplier;
+				const offeredCatMultiplier = offeredCatDetail.symbol == 'XCH' ? xchMultiplier : catMultiplier;
 				const offeredAmount = offered[index][1] / offeredCatMultiplier;
-				embed.addField('Offers :inbox_tray:', `${offeredAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${offeredCatDetail.code}`, true);
+				embed.addField('Offers :inbox_tray:', `${offeredAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${offeredCatDetail.symbol}`, true);
 			}
 			else {
 				embed.addField('\u200B', '\u200B');

@@ -1,8 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const { getCachedTokensLastUpdated } = require('../../../controllers/TokenController');
 module.exports = {
-	name: 'configureCatEmbeds',
-	async configureCatEmbeds(interaction, token) {
+	name: 'CatConfigureEmbeds',
+	async CatConfigureEmbeds(interaction, token) {
 		const formatCurrencyOptions = { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 };
 		const formatNumberOptions = { minimumFractionDigits: 0, maximumFractionDigits: 2 };
 		const formatDateOptions = { dateStyle: 'medium', timeStyle: 'short' };

@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { getOfferSummary, getOfferValidity } = require('../../../api_clients/ChiaWalletRpcClient');
-const { configureOfferEmbed } = require('../templates/configureOfferEmbed');
+const { OfferConfigureEmbeds } = require('../templates/OfferConfigureEmbeds');
 
 module.exports = {
 	name: 'messageCreate',
@@ -20,7 +20,7 @@ module.exports = {
 
 			const member = message.mentions.members.first() || message.member;
 
-			const offerEmbed = await configureOfferEmbed(message, new MessageEmbed(), offerValidResult, offerSummaryResult);
+			const offerEmbed = await OfferConfigureEmbeds(message, new MessageEmbed(), offerValidResult, offerSummaryResult);
 			offerEmbed.setAuthor({ name:member.user.tag, iconURL:member.user.avatarURL() });
 
 			message.reply({ content:'An offer file :seedling: eh? Let\'s see what we\'ve got...', embeds:[offerEmbed] });
