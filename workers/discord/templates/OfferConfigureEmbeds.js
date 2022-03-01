@@ -18,7 +18,6 @@ module.exports = {
 		const tc = new TokenController();
 		for (let index = 0; index < offered.length || index < requested.length; index++) {
 			if (index < requested.length) {
-				console.info(requested[index][0]);
 				const requestedCatDetail = await tc.findByTail(requested[index][0]);
 				const requestedCatMultiplier = requestedCatDetail.symbol == 'XCH' ? xchMultiplier : catMultiplier;
 				const requestedAmount = requested[index][1] / requestedCatMultiplier;
