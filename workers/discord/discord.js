@@ -25,5 +25,8 @@ const startDiscordBot = async () => {
 
 
 	client.login(process.env.DISCORD_BOT_CLIENT_TOKEN);
+	const guilds = await client.guilds.fetch();
+	guilds.forEach(guild => console.info(`--Guild:${guild.name}`));
+
 };
 module.exports.startDiscordBot = startDiscordBot;
