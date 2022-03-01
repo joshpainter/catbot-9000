@@ -4,12 +4,12 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			if (!interaction.isButton()) return;
-			this.logInfo(`customId=${interaction.customId}`);
 			const buttonOptions = JSON.parse(interaction.customId);
+			this.logInfo(interaction, `confirm=${buttonOptions.confirm}&cat=${buttonOptions.symbol}`);
 			if (buttonOptions.id == 'prove') {
 
 				// const cat = interaction.options.getString('cat');
-				console.info(JSON.stringify(buttonOptions));
+				// console.info(JSON.stringify(buttonOptions));
 
 				// const catDetails = await get_tails();
 				// const selectedCats = selected?.code ? catDetails.tails.filter(tailItem => tailItem.code.toLowerCase() == selected.code.toLowerCase()) : catDetails.tails;
@@ -19,6 +19,7 @@ module.exports = {
 				// await configureCatEmbed(catEmbed, selectedCat);
 
 				// await interaction.update({ content: interaction.message.content, embeds: [catEmbed], components: interaction.components });
+				await interaction.reply({ content: 'Under construction...', ephemeral: true });
 			}
 		}
 		catch (error) {

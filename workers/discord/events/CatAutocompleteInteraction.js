@@ -5,7 +5,7 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			if (!interaction.isAutocomplete()) return;
-			const query = interaction.options.getString('search') || '';
+			const query = interaction.options.getString('search') || interaction.options.getString('cat') || '';
 			const responses = [];
 			if (query) {
 				responses.push({

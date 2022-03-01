@@ -1,10 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const { get_tails } = require('../../../api-clients/TailDatabaseClient');
-const { configureCatEmbed } = require('../templates/CatConfigureEmbeds');
+const { MessageActionRow, MessageButton } = require('discord.js');
+const { CatConfigureEmbeds } = require('../templates/CatConfigureEmbeds');
 const { getDadJoke } = require('../../../api-clients/ICanHazDadJokeClient');
-const _ = require('lodash');
-
+const { TokenController } = require('../../../controllers/TokenController');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('prove')
@@ -14,28 +12,20 @@ module.exports = {
 			.setDescription('Enter the TAIL or symbol of the CAT (e.g. CATMOS)')
 			.setAutocomplete(true)
 			.setRequired(true)),
+	customName: 'ProveCommand',
 	async execute(interaction) {
 		const cat = interaction.options.getString('cat');
-		console.info(`/prove cat ${cat}`);
-		const catDetails = await get_tails();
-		let filteredCats = _.filter(catDetails.tails, tailItem => tailItem.hash.toLowerCase() == cat.toLowerCase());
-		if (!filteredCats.length) {
-			filteredCats = _.filter(catDetails.tails, tailItem => tailItem.code.toLowerCase() == cat.toLowerCase());
-		}
-		if (filteredCats.length != 1) {
+		this.logInfo(interaction, `cat=${cat}`);
+		const tc = new TokenController();
+		const tokens = await tc.search(cat);
+		if (!tokens.length) {
 			const dadJoke = await getDadJoke();
-			await interaction.reply(`Couldn't find exact match for \`\`${cat}\`\`, sorry! Would a joke cheer you up? Yeah? Ok! ${dadJoke.joke}`);
+			await interaction.reply(`Couldn't find any results for \`\`${cat}\`\`, sorry! Would a joke cheer you up? Yeah? Ok! ${dadJoke.joke}`);
 		}
 		else {
-			const catEmbeds = new Array();
 			const components = new Array();
-
-			const selectedCat = filteredCats[0];
-
-			const catEmbed = new MessageEmbed();
-			await configureCatEmbed(catEmbed, selectedCat);
-			catEmbeds.push(catEmbed);
-
+			const selectedCat = tokens[0];
+			const catEmbeds = await CatConfigureEmbeds(interaction, selectedCat);
 			const row = new MessageActionRow()
 				.addComponents(
 					new MessageButton()
@@ -43,7 +33,7 @@ module.exports = {
 						.setCustomId(JSON.stringify({
 							id: 'prove',
 							confirm: true,
-							cat: selectedCat.code,
+							symbol: selectedCat.symbol,
 						}))
 						.setLabel('Yes'),
 					new MessageButton()
@@ -51,14 +41,13 @@ module.exports = {
 						.setCustomId(JSON.stringify({
 							id: 'prove',
 							confirm: false,
-							cat: selectedCat.code,
+							symbol: selectedCat.symbol,
 						}))
 						.setLabel('No'),
 				);
-
 			components.push(row);
-
 			await interaction.reply({ content:'Is this the correct CAT?', embeds:catEmbeds, components:components });
 		}
 	},
+	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:INFO:> ${logText}`),
 };
