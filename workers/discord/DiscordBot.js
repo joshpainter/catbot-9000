@@ -24,9 +24,14 @@ const startDiscordBot = async () => {
 	}
 
 
-	client.login(process.env.DISCORD_BOT_CLIENT_TOKEN);
+	await client.login(process.env.DISCORD_BOT_CLIENT_TOKEN);
 	const guilds = await client.guilds.fetch();
 	guilds.forEach(guild => console.info(`--Guild:${guild.name}`));
+	client.user.setActivity({
+		name: `${guilds.size} servers`,
+		type: 'LISTENING',
+		status: 'ONLINE',
+	});
 
 };
 module.exports.startDiscordBot = startDiscordBot;
