@@ -15,10 +15,11 @@ module.exports = {
 			.setRequired(true)),
 	async execute(interaction) {
 		const query = interaction.options.getString('search');
-		console.info(`/cat search ${query}`);
+		console.info(`CatCommand:INFO:${interaction.guild.name}> /cat search ${query} `);
 		const tc = new TokenController();
 		const allTokens = await tc.fetch();
 		const tokens = await tc.search(query);
+		console.info(`CatCommand:INFO:${interaction.guild.name}> found ${tokens.length} matches for ${query} `);
 		if (!tokens.length) {
 			const dadJoke = await getDadJoke();
 			await interaction.reply(`Couldn't find \`\`${query}\`\`, sorry! Would a joke cheer you up? Yeah? Ok! ${dadJoke.joke}`);
@@ -39,10 +40,10 @@ module.exports = {
 					row.components[0].addOptions([
 						{
 							label: `${token.name} (${token.symbol})`,
-							description: null,
+							// description: token.tail,
 							value: JSON.stringify({
 								search: query,
-								symbol: token.symbol,
+								tail: token.tail,
 							}),
 						},
 					]);
