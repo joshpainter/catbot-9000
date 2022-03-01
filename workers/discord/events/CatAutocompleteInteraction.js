@@ -6,7 +6,6 @@ module.exports = {
 		try {
 			if (!interaction.isAutocomplete()) return;
 			const query = interaction.options.getString('search') || '';
-			// this.logInfo(interaction, `searching for '${query}'...`);
 			const responses = [];
 			if (query) {
 				responses.push({
