@@ -1,6 +1,6 @@
-const { getOrderBook, uploadMyOrder } = require('../../api_clients/HashgreenClient');
-// const { getDadJoke } = require('../../../api_clients/ICanHazDadJokeClient');
-const { createOffer } = require('../../api_clients/ChiaWalletRpcClient');
+const { getOrderBook, uploadMyOrder } = require('../../api-clients/HashgreenClient');
+// const { getDadJoke } = require('../../../api-clients/ICanHazDadJokeClient');
+const { createOffer } = require('../../api-clients/ChiaWalletRpcClient');
 
 const startMarketMaker = async () => {
 

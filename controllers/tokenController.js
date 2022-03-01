@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const { spacescanGetCatsApi } = require('../api_clients/SpacescanClient');
-const { tailDatabaseGetTails } = require('../api_clients/TailDatabaseClient');
-const { xchtokenGetTokenApi } = require('../api_clients/XchTokenClient');
+const { spacescanGetCatsApi } = require('../api-clients/SpacescanClient');
+const { tailDatabaseGetTails } = require('../api-clients/TailDatabaseClient');
+const { xchtokenGetTokenApi } = require('../api-clients/XchTokenClient');
 const { TokenModel } = require('../models/TokenModel');
 let cachedTokens = new Array();
 let cachedTokensLastUpdated = new Date();
