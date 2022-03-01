@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const { TokenController } = require('./controllers/TokenController');
-const { startDiscordBot } = require('./workers/discord/discord');
-const { startMarketMaker } = require('./workers/market-maker/market-maker');
+const { startDiscordBot } = require('./workers/discord/DiscordBot');
+const { startMarketMaker } = require('./workers/market-maker/MarketMakerBot');
 
 const refreshTokenCache = async () => {
 	const tc = new TokenController();
