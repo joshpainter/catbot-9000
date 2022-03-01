@@ -1,4 +1,4 @@
-const { tokenController } = require('../../../controllers/tokenController');
+const { TokenController } = require('../../../controllers/TokenController');
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction) {
@@ -13,7 +13,7 @@ module.exports = {
 		}
 		if (query?.length >= 3) {
 			console.info(`autocompleteInteraction: ${query}`);
-			const tc = new tokenController();
+			const tc = new TokenController();
 			const tokens = await tc.search(query);
 			for (const token of tokens) {
 				responses.push({

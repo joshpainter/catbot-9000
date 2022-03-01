@@ -1,20 +1,20 @@
-const { tokenController } = require('./tokenController');
+const { TokenController } = require('./TokenController');
 
-test('fetches tokens using tokenController', async () => {
-	const tc = new tokenController();
+test('fetches tokens using TokenController', async () => {
+	const tc = new TokenController();
 	const tokens = await tc.fetch();
 	expect(tokens.length).toBeGreaterThan(0);
 });
 
-test('fetches CATMOS token using tokenController.fetch()', async () => {
-	const tc = new tokenController();
+test('fetches CATMOS token using TokenController.fetch()', async () => {
+	const tc = new TokenController();
 	const tokens = await tc.fetch();
 	const catmos = tokens.filter(token => token.symbol == 'CATMOS')[0];
 	expect(catmos.name).toBe('Catmosphere');
 });
 
-test('searches for CATMOS token using tokenController.search()', async () => {
-	const tc = new tokenController();
+test('searches for CATMOS token using TokenController.search()', async () => {
+	const tc = new TokenController();
 	const tokens = await tc.search('CATMOS');
 	expect(tokens[0].name).toBe('Catmosphere');
 });

@@ -2,19 +2,19 @@ const _ = require('lodash');
 const { spacescanGetCatsApi } = require('../api_clients/SpacescanClient');
 const { tailDatabaseGetTails } = require('../api_clients/TailDatabaseClient');
 const { xchtokenGetTokenApi } = require('../api_clients/XchTokenClient');
-const { tokenModel } = require('../models/tokenModel');
+const { TokenModel } = require('../models/TokenModel');
 let cachedTokens = new Array();
 let cachedTokensLastUpdated = new Date();
 const getCachedTokensLastUpdated = () => cachedTokensLastUpdated;
 module.exports.getCachedTokensLastUpdated = getCachedTokensLastUpdated;
-class tokenController {
+class TokenController {
 	async fetch(disableCache) {
 		try {
 			if (!cachedTokens || disableCache) {
 				const tokens = new Array();
 				const tailDbApiResults = await tailDatabaseGetTails();
 				tailDbApiResults.forEach(tailDbResult => {
-					const token = new tokenModel();
+					const token = new TokenModel();
 					token.mergeTailDatabaseData(tailDbResult);
 					tokens.push(token);
 				});
@@ -22,7 +22,7 @@ class tokenController {
 				xchTokenApiResults.forEach(xchTokenApiResult => {
 					let token = _.find(tokens, findToken => findToken.tail == xchTokenApiResult.ASSET_ID);
 					if (!token) {
-						token = new tokenModel();
+						token = new TokenModel();
 						tokens.push(token);
 					}
 					token.mergeXchTokenData(xchTokenApiResult);
@@ -31,7 +31,7 @@ class tokenController {
 				spacescanApiResults.forEach(spacescanApiResult => {
 					let token = _.find(tokens, findToken => findToken.tail == spacescanApiResult.asset_id);
 					if (!token) {
-						token = new tokenModel();
+						token = new TokenModel();
 						tokens.push(token);
 					}
 					token.mergeSpacescanData(spacescanApiResult);
@@ -58,4 +58,4 @@ class tokenController {
 		return foundToken;
 	}
 }
-module.exports.tokenController = tokenController;
+module.exports.TokenController = TokenController;

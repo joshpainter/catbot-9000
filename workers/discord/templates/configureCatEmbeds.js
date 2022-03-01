@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { getCachedTokensLastUpdated } = require('../../../controllers/tokenController');
+const { getCachedTokensLastUpdated } = require('../../../controllers/TokenController');
 module.exports = {
 	name: 'configureCatEmbeds',
 	async configureCatEmbeds(interaction, token) {

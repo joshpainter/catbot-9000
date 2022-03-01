@@ -1,5 +1,5 @@
 const _ = require('lodash');
-class tokenModel {
+class TokenModel {
 	mergeTailDatabaseData(tailDatabaseData) {
 		if (tailDatabaseData) {
 			this.importedFromTailDatabase = true;
@@ -57,4 +57,4 @@ class tokenModel {
 		}
 	}
 }
-module.exports.tokenModel = tokenModel;
+module.exports.TokenModel = TokenModel;

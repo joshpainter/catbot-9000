@@ -1,4 +1,4 @@
-const { tokenController } = require('../../../controllers/tokenController');
+const { TokenController } = require('../../../controllers/TokenController');
 module.exports = {
 	name: 'configureOfferEmbed',
 	async configureOfferEmbed(interaction, embed, offerValidResult, offerSummaryResult) {
@@ -15,7 +15,7 @@ module.exports = {
 		const offered = Object.entries(offerSummaryResult.summary.offered);
 		const requested = Object.entries(offerSummaryResult.summary.requested);
 
-		const tc = new tokenController();
+		const tc = new TokenController();
 		for (let index = 0; index < offered.length || index < requested.length; index++) {
 			if (index < requested.length) {
 				const requestedCatDetail = await tc.findByTail(requested[index][0]);

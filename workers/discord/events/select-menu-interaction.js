@@ -1,5 +1,5 @@
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { tokenController } = require('../../../controllers/tokenController');
+const { TokenController } = require('../../../controllers/TokenController');
 const { configureCatComponents } = require('../templates/configureCatComponents');
 const { configureCatEmbeds } = require('../templates/configureCatEmbeds');
 
@@ -10,7 +10,7 @@ module.exports = {
 		console.info(`selectMenuInteraction: ${interaction.customId}`);
 		if (interaction.customId == 'select-cat') {
 			const selected = JSON.parse(interaction.values[0]);
-			const tc = new tokenController();
+			const tc = new TokenController();
 			const tokens = await tc.search(selected.search);
 			const selectedTokens = await tc.search(selected.symbol);
 			const selectedToken = selectedTokens[0];

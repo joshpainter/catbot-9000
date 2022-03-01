@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { configureCatEmbeds } = require('../templates/configureCatEmbeds');
 const { getDadJoke } = require('../../../api_clients/ICanHazDadJokeClient');
-const { tokenController } = require('../../../controllers/tokenController');
+const { TokenController } = require('../../../controllers/TokenController');
 const { configureCatComponents } = require('../templates/configureCatComponents');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
 	async execute(interaction) {
 		const query = interaction.options.getString('search');
 		console.info(`/cat search ${query}`);
-		const tc = new tokenController();
+		const tc = new TokenController();
 		const allTokens = await tc.fetch();
 		const tokens = await tc.search(query);
 		if (!tokens.length) {
