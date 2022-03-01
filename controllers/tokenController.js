@@ -53,6 +53,9 @@ class TokenController {
 		return filteredTokens;
 	}
 	async findByTail(tail) {
+		if (tail === 'xch') {
+			return new TokenModel();
+		}
 		const tokens = await this.fetch();
 		const foundToken = _.find(tokens, token => token.tail?.toLowerCase() == tail?.toLowerCase());
 		return foundToken;
