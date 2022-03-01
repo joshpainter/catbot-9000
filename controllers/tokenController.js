@@ -55,7 +55,7 @@ class TokenController {
 		let tokens = await this.fetch();
 		tokens = _.filter(tokens, token => token.tail);
 		let filteredTokens = _.filter(tokens, token => token.tail?.toLowerCase() == query.toLowerCase());
-		filteredTokens = _.unionBy(filteredTokens, _.filter(tokens, token => token.symbol?.toLowerCase() == query.toLowerCase()), token => token.tail.toLowerCase());
+		filteredTokens = _.unionBy(filteredTokens, _.filter(tokens, token => token.symbol?.toLowerCase().startsWith(query.toLowerCase())), token => token.tail.toLowerCase());
 		filteredTokens = _.unionBy(filteredTokens, _.filter(tokens, token => token.description?.toLowerCase().includes(query.toLowerCase()) || token.name?.toLowerCase().includes(query.toLowerCase())), token => token.tail);
 		return filteredTokens;
 	}
