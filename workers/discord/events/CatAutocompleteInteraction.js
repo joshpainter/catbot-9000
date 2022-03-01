@@ -31,6 +31,6 @@ module.exports = {
 			this.logError(interaction, error);
 		}
 	},
-	logInfo: (interaction, logText) => console.info(`${interaction.guild.name}:${module.exports.customName}:INFO:> ${logText}`),
-	logError: (interaction, error) => console.error(`${interaction.guild?.name}:${module.exports.customName}:ERROR:> ${error}`),
+	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:INFO:> ${logText}`),
+	logError: (interaction, error) => console.error(`${interaction?.guild?.name}:${module.exports.customName}:ERROR:> ${error}`),
 };

@@ -4,15 +4,17 @@ const { CatConfigureComponents } = require('../templates/CatConfigureComponents'
 const { CatConfigureEmbeds } = require('../templates/CatConfigureEmbeds');
 module.exports = {
 	name: 'interactionCreate',
+	customName: 'CatSelectMenuInteraction',
 	async execute(interaction) {
 		try {
 			if (!interaction.isSelectMenu()) return;
-			console.info(`selectMenuInteraction: ${interaction.customId}`);
 			if (interaction.customId == 'select-cat') {
 				const selected = JSON.parse(interaction.values[0]);
 				const tc = new TokenController();
-				const tokens = await tc.search(selected.search);
 				const selectedToken = await tc.findByTail(selected.tail);
+				this.logInfo(interaction, `selected token is ${selectedToken.name}`);
+				const tokens = await tc.search(selected.search);
+				this.logInfo(interaction, `search for ${selected.search} found ${tokens.length} tokens`);
 				const catEmbeds = await CatConfigureEmbeds(interaction, selectedToken);
 				const catComponents = await CatConfigureComponents(interaction, selectedToken);
 				if (tokens.length > 1) {
@@ -27,7 +29,6 @@ module.exports = {
 						row.components[0].addOptions([
 							{
 								label: `${token.name} (${token.symbol})`,
-								// description: token.tail,
 								value: JSON.stringify({
 									search: selected.search,
 									tail: token.tail,
@@ -43,7 +44,9 @@ module.exports = {
 			}
 		}
 		catch (error) {
-			console.error(`selectMenuInteraction:ERROR:${error}`);
+			this.logError(interaction, error);
 		}
 	},
+	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:${interaction?.customId}:INFO:> ${logText}`),
+	logError: (interaction, error) => console.error(`${interaction?.guild?.name}:${module.exports.customName}:${interaction?.customId}:ERROR:> ${error}`),
 };
