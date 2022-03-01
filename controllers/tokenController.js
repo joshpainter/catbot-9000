@@ -12,6 +12,12 @@ class TokenController {
 		try {
 			if (!cachedTokens || disableCache) {
 				const tokens = new Array();
+				tokens.push({
+					name: 'Chia',
+					symbol: 'XCH',
+					tail: '1',
+					description: 'Digital money for a digital world.',
+				});
 				const tailDbApiResults = await tailDatabaseGetTails();
 				tailDbApiResults.forEach(tailDbResult => {
 					const token = new TokenModel();
@@ -46,10 +52,11 @@ class TokenController {
 		return cachedTokens;
 	}
 	async search(query) {
-		const tokens = await this.fetch();
+		let tokens = await this.fetch();
+		tokens = _.filter(tokens, token => token.tail);
 		let filteredTokens = _.filter(tokens, token => token.tail?.toLowerCase() == query.toLowerCase());
-		filteredTokens = _.union(filteredTokens, _.filter(tokens, token => token.symbol?.toLowerCase() == query.toLowerCase()));
-		filteredTokens = _.union(filteredTokens, _.filter(tokens, token => token.description?.toLowerCase().includes(query.toLowerCase()) || token.name?.toLowerCase().includes(query.toLowerCase())));
+		filteredTokens = _.unionBy(filteredTokens, _.filter(tokens, token => token.symbol?.toLowerCase() == query.toLowerCase()), token => token.tail.toLowerCase());
+		filteredTokens = _.unionBy(filteredTokens, _.filter(tokens, token => token.description?.toLowerCase().includes(query.toLowerCase()) || token.name?.toLowerCase().includes(query.toLowerCase())), token => token.tail);
 		return filteredTokens;
 	}
 	async findByTail(tail) {

@@ -1,11 +1,5 @@
 const _ = require('lodash');
 class TokenModel {
-	constructor() {
-		this.name = 'Chia';
-		this.symbol = 'XCH';
-		this.tail = '1';
-		this.description = 'Digital money for a digital world.';
-	}
 	mergeTailDatabaseData(tailDatabaseData) {
 		if (tailDatabaseData) {
 			this.importedFromTailDatabase = true;
