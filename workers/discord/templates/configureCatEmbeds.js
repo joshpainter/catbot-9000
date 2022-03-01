@@ -21,19 +21,19 @@ module.exports = {
 			.addField('TAIL', token.tail ?? 'Unknown', false);
 
 		if (token.amountIssued) {
-			embed.addField('Amount Issued', token.amountIssued?.toLocaleString(interaction.locale, formatNumberOptions) ?? 'Unknown', true);
+			embed.addField('Amount Issued', token.amountIssued?.toLocaleString(interaction.locale, formatNumberOptions) || 'Unknown', true);
 		}
 		if (token.issuedOn) {
-			embed.addField('Issued On', token.issuedOn?.toLocaleString(interaction.locale, formatDateOptions) ?? 'Unknown', true);
+			embed.addField('Issued On', token.issuedOn?.toLocaleString(interaction.locale, formatDateOptions) || 'Unknown', true);
 		}
 		if (token.priceUsd) {
-			embed.addField('Price (USD)', `${token.price?.toLocaleString(interaction.locale, formatCurrencyOptions) ?? 'Unknown'}`, true);
+			embed.addField('Price (USD)', `${token.price?.toLocaleString(interaction.locale, formatCurrencyOptions) || 'Unknown'}`, true);
 		}
 		if (token.transactionCount) {
-			embed.addField('Total Transactions', `${token.transactionCount?.toLocaleString(interaction.locale, formatNumberOptions) ?? 'Unknown'}`, true);
+			embed.addField('Total Transactions', `${token.transactionCount?.toLocaleString(interaction.locale, formatNumberOptions) || 'Unknown'}`, true);
 		}
 		if (token.transactionAmount) {
-			embed.addField('Total Volume', `${token.transactionAmount?.toLocaleString(interaction.locale, formatNumberOptions) ?? 'Unknown'}`, true);
+			embed.addField('Total Volume', `${token.transactionAmount?.toLocaleString(interaction.locale, formatNumberOptions) || 'Unknown'}`, true);
 		}
 		return [embed];
 	},

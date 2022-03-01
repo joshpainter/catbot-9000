@@ -4,7 +4,7 @@ module.exports = {
 	async configureCatComponents(interaction, selectedToken) {
 		const components = new Array();
 		const socialLinksRow = new MessageActionRow();
-		if (selectedToken.websiteUrl?.length) {
+		if (selectedToken.websiteUrl) {
 			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -13,7 +13,7 @@ module.exports = {
 					.setLabel('Website'),
 			);
 		}
-		if (selectedToken.discordUrl?.length) {
+		if (selectedToken.discordUrl) {
 			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -22,7 +22,7 @@ module.exports = {
 					.setLabel('Discord'),
 			);
 		}
-		if (selectedToken.twitterUrl?.length) {
+		if (selectedToken.twitterUrl) {
 			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -31,7 +31,7 @@ module.exports = {
 					.setLabel('Twitter'),
 			);
 		}
-		if (selectedToken.facebookUrl?.length) {
+		if (selectedToken.facebookUrl) {
 			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -40,7 +40,7 @@ module.exports = {
 					.setLabel('Facebook'),
 			);
 		}
-		if (selectedToken.redditUrl?.length) {
+		if (selectedToken.redditUrl) {
 			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -49,7 +49,7 @@ module.exports = {
 					.setLabel('Reddit'),
 			);
 		}
-		if (selectedToken.telegramUrl?.length) {
+		if (selectedToken.telegramUrl) {
 			socialLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -58,7 +58,9 @@ module.exports = {
 					.setLabel('Telegram'),
 			);
 		}
-		components.push(socialLinksRow);
+		if (socialLinksRow.components.length) {
+			components.push(socialLinksRow);
+		}
 		const catApiLinksRow = new MessageActionRow();
 		if (selectedToken.importedFromTailDatabase) {
 			catApiLinksRow.addComponents(
