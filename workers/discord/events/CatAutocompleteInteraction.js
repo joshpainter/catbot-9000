@@ -29,6 +29,7 @@ module.exports = {
 		}
 		catch (error) {
 			this.logError(interaction, error);
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		}
 	},
 	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:INFO:> ${logText}`),

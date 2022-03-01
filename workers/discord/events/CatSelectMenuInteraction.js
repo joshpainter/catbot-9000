@@ -8,6 +8,7 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			if (!interaction.isSelectMenu()) return;
+			this.logInfo(interaction, `customId=${interaction.customId}`);
 			if (interaction.customId == 'select-cat') {
 				const selected = JSON.parse(interaction.values[0]);
 				const tc = new TokenController();
@@ -45,6 +46,7 @@ module.exports = {
 		}
 		catch (error) {
 			this.logError(interaction, error);
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		}
 	},
 	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:${interaction?.customId}:INFO:> ${logText}`),
