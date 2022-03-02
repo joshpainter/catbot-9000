@@ -64,6 +64,10 @@ class TokenModel {
 	get Description() {
 		return this.spacescanData?.description || this.xchTokenData?.Introduction || this.tailDatabaseData?.description;
 	}
+	get DescriptionEmojis() {
+		const emojis = Array.from(emojifier.translate(this.Description, true)).filter(emoji => emojifier.isMaybeAlreadyAnEmoji(emoji));
+		return _.uniq(emojis);
+	}
 	get AmountIssued() {
 		return this.amountIssued;
 	}

@@ -46,11 +46,14 @@ module.exports = {
 				}
 				catComponents.push(new MessageActionRow().addComponents(selectMenu));
 			}
-			await interaction.reply({
-				content:`Sifted through ${allTokens.length} CATS looking for '${query}' and found ${tokens.length > 1 ? `${tokens.length} results! Use the menu below to see the other results.\n〰〰〰〰\n:scream_cat: :1234: :face_with_monocle:` : 'exactly one result!\n\n:heart_eyes_cat: :dart: :eyes:'} :point_down:\n〰〰〰〰`,
+			const message = await interaction.reply({
+				content:`Sifted through ${allTokens.length} CATS looking for '${query}' and found ${tokens.length > 1 ? `${tokens.length} results! Use the menu below to see the other results.` : 'exactly one result!'}`,
 				embeds:catEmbeds,
 				components:catComponents,
+				fetchReply: true,
 			});
+			Promise.all(selectedToken.DescriptionEmojis.map(emoji => message.react(emoji).catch(() => console.error(`emoji ${emoji} not found`))));
+
 		}
 	},
 	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:INFO:> ${logText}`),

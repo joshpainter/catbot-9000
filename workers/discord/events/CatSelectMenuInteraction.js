@@ -19,7 +19,10 @@ module.exports = {
 				const catComponents = await CatConfigureComponents(interaction, selectedToken);
 				const selectMenuComponent = interaction.message.components.pop();
 				catComponents.push(selectMenuComponent);
+
 				await interaction.update({ content: interaction.message.content, embeds: catEmbeds, components: catComponents });
+				Promise.all(selectedToken.DescriptionEmojis.map(emoji => interaction.message.react(emoji).catch(() => console.error(`emoji ${emoji} not found`))));
+
 			}
 		}
 		catch (error) {
