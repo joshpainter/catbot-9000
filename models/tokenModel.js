@@ -2,7 +2,8 @@ const _ = require('lodash');
 class TokenModel {
 	mergeTailDatabaseData(tailDatabaseData) {
 		if (tailDatabaseData) {
-			this.importedFromTailDatabase = true;
+			this.importedFromTailDatabaseOn = new Date();
+			this.dataIsCleanForTailDatabase = tailDatabaseData.code?.length > 0;
 			this.name = tailDatabaseData.name;
 			this.tail = tailDatabaseData.hash;
 			this.symbol = tailDatabaseData.code;
@@ -15,7 +16,8 @@ class TokenModel {
 	}
 	mergeXchTokenData(xchTokenData) {
 		if (xchTokenData) {
-			this.importedFromXchToken = true;
+			this.importedFromXchTokenOn = new Date();
+			this.dataIsCleanForXchToken = xchTokenData.Symbol?.length > 0;
 			this.name = xchTokenData.Name || this.name;
 			this.tail = xchTokenData.ASSET_ID || this.tail;
 			this.symbol = xchTokenData.Symbol || this.symbol;
@@ -34,12 +36,12 @@ class TokenModel {
 	}
 	mergeSpacescanData(spacescanData) {
 		if (spacescanData) {
-			this.needsSpacescanUpdate = spacescanData.symbol == null;
-			this.importedFromSpacescan = true;
+			this.importedFromSpacescanOn = new Date();
+			this.dataIsCleanForSpacescan = spacescanData.symbol?.length > 0;
 			this.name = spacescanData.asset_name || this.name;
 			this.tail = spacescanData.asset_id || this.tail;
 			this.symbol = spacescanData.symbol || this.symbol;
-			this.logoUrl = spacescanData.logo || this.logoUrl;
+			this.logoUrl = spacescanData.logo && spacescanData.logo != 'https://images.spacescan.io/xch/cat/default_logo.png' ? spacescanData.logo : this.logoUrl;
 			this.description = spacescanData.description || this.description;
 			this.amountIssued = spacescanData.total_supply || this.amountIssued;
 			this.issuedOn = spacescanData.issued_time || this.issuedOn;
@@ -125,6 +127,13 @@ class TokenModel {
 	}
 	get TransactionAmount() {
 		return this.transactionAmount;
+	}
+	get ApisMissingDetails() {
+		const apisMissingDetails = new Array();
+		if (!this.dataIsCleanForTailDatabase) apisMissingDetails.push('taildatabase');
+		if (!this.dataIsCleanForXchToken) apisMissingDetails.push('xchtoken');
+		if (!this.dataIsCleanForSpacescan) apisMissingDetails.push('spacescan');
+		return apisMissingDetails;
 	}
 }
 module.exports.TokenModel = TokenModel;

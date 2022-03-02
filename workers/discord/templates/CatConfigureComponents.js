@@ -75,7 +75,7 @@ module.exports = {
 			components.push(socialLinksRow2);
 		}
 		const catApiLinksRow = new MessageActionRow();
-		if (selectedToken.importedFromTailDatabase) {
+		if (selectedToken.importedFromTailDatabaseOn) {
 			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -84,7 +84,7 @@ module.exports = {
 					.setLabel('taildatabase.com'),
 			);
 		}
-		if (selectedToken.importedFromXchToken) {
+		if (selectedToken.importedFromXchTokenOn) {
 			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
@@ -93,7 +93,7 @@ module.exports = {
 					.setLabel('xchtoken.org'),
 			);
 		}
-		if (selectedToken.importedFromSpacescan) {
+		if (selectedToken.importedFromSpacescanOn) {
 			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')

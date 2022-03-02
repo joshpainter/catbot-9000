@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const { getCachedTokensLastUpdated } = require('../../../controllers/TokenController');
 module.exports = {
 	name: 'CatConfigureEmbeds',
 	async CatConfigureEmbeds(interaction, token) {
@@ -9,14 +8,19 @@ module.exports = {
 		if (interaction.message) {
 			await interaction.message.suppressEmbeds(false);
 		}
-		const embed = new MessageEmbed(interaction.message?.embeds[0]);
+		const dataSummary = `Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromSpacescanOn.toLocaleString(interaction.locale, formatDateOptions)}`;
+		// let dataSummary = `✅ All sources agree. Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromSpacescanOn.toLocaleString(interaction.locale, formatDateOptions)}`;
+		// if (!token.importedFromTailDatabaseOn || !token.importedFromXchTokenOn || !token.importedFromSpacescanOn) {
+		// 	dataSummary = `🟥 Sources do not have complete data. Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromSpacescanOn.toLocaleString(interaction.locale, formatDateOptions)}`;
+		// }
+		const embed = new MessageEmbed();
 		embed
-			.setColor('#57c776')
+			.setColor(token.ApisMissingDetails.length ? 'YELLOW' : 'GREEN')
 			.setTitle(`${token.name} (${token.symbol})`)
 			.setURL(`https://www.spacescan.io/xch/cat1/${token.tail}`)
 			.setDescription(token.description ?? 'Unknown')
 			.setThumbnail(token.logoUrl)
-			.setFooter({ text: `Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${getCachedTokensLastUpdated().toLocaleString(interaction.locale, formatDateOptions)}` })
+			.setFooter({ text: dataSummary })
 			.setFields([])
 			.addField('TAIL', token.tail ?? 'Unknown', false);
 
@@ -37,4 +41,5 @@ module.exports = {
 		}
 		return [embed];
 	},
+	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.name}:INFO:> ${logText}`),
 };
