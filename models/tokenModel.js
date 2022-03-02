@@ -52,9 +52,81 @@ class TokenModel {
 				this.holders = spacescanData.holders;
 				this.tags = spacescanData.tags;
 				this.transactionCount = spacescanData.txns_count;
-				// this.transactionAmount = spacescanData.txns_amount;
+				this.transactionAmount = spacescanData.txns_amount;
 			}
 		}
+	}
+	get DisplayName() {
+		return `${this.Name} (${this.Symbol})`;
+	}
+	get Name() {
+		return this.name;
+	}
+	get Tail() {
+		return this.tail;
+	}
+	get Symbol() {
+		return this.symbol;
+	}
+	get LogoUrl() {
+		return this.logoUrl;
+	}
+	get Description() {
+		return this.description;
+	}
+	get AmountIssued() {
+		return this.amountIssued;
+	}
+	get ChiaLisp() {
+		return this.chiaLisp;
+	}
+	get Clvm() {
+		return this.clvm;
+	}
+	get IssuedOn() {
+		return this.issuedOn;
+	}
+	get IssuedHeight() {
+		return this.issuedHeight;
+	}
+	get DiscordUrl() {
+		return this.discordUrl;
+	}
+	get FacebookUrl() {
+		return this.facebookUrl;
+	}
+	get RedditUrl() {
+		return this.redditUrl;
+	}
+	get TelegramUrl() {
+		return this.telegramUrl;
+	}
+	get TwitterUrl() {
+		return this.twitterUrl;
+	}
+	get WebsiteUrl() {
+		return this.websiteUrl;
+	}
+	get PriceUsd() {
+		return this.priceUsd;
+	}
+	get PriceXch() {
+		return this.priceXch;
+	}
+	get UpdatedOn() {
+		return this.updatedOn;
+	}
+	get Holders() {
+		return this.holders;
+	}
+	get Tags() {
+		return this.tags;
+	}
+	get TransactionCount() {
+		return this.transactionCount;
+	}
+	get TransactionAmount() {
+		return this.transactionAmount;
 	}
 }
 module.exports.TokenModel = TokenModel;
