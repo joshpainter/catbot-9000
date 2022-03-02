@@ -33,7 +33,7 @@ module.exports = {
 						.setCustomId(JSON.stringify({
 							id: 'prove',
 							confirm: true,
-							symbol: selectedCat.symbol,
+							symbol: selectedCat.Symbol,
 						}))
 						.setLabel('Yes'),
 					new MessageButton()
@@ -41,7 +41,7 @@ module.exports = {
 						.setCustomId(JSON.stringify({
 							id: 'prove',
 							confirm: false,
-							symbol: selectedCat.symbol,
+							symbol: selectedCat.Symbol,
 						}))
 						.setLabel('No'),
 				);

@@ -16,10 +16,10 @@ module.exports = {
 		const embed = new MessageEmbed();
 		embed
 			.setColor(token.ApisMissingDetails.length ? 'YELLOW' : 'GREEN')
-			.setTitle(`${token.Name} (${token.symbol})`)
+			.setTitle(`${token.Name} (${token.Symbol})`)
 			.setURL(`https://www.spacescan.io/xch/cat1/${token.Tail}`)
-			.setDescription(token.description ?? 'Unknown')
-			.setThumbnail(token.logoUrl)
+			.setDescription(token.Description ?? 'Unknown')
+			.setThumbnail(token.LogoUrl)
 			.setFooter({ text: dataSummary })
 			.setFields([])
 			.addField('TAIL', token.Tail ?? 'Unknown', false);

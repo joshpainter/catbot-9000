@@ -1,13 +1,11 @@
 const _ = require('lodash');
+const emojifier = require('moji-translate');
 class TokenModel {
 	mergeTailDatabaseData(tailDatabaseData) {
 		this.tailDatabaseData = tailDatabaseData;
 		if (tailDatabaseData) {
 			this.importedFromTailDatabaseOn = new Date();
 			this.dataIsCleanForTailDatabase = tailDatabaseData.code?.length > 0;
-			this.symbol = tailDatabaseData.code;
-			this.logoUrl = tailDatabaseData.logo_url;
-			this.description = tailDatabaseData.description;
 			this.amountIssued = tailDatabaseData.supply;
 			this.chiaLisp = tailDatabaseData.chialisp;
 			this.clvm = tailDatabaseData.clvm;
@@ -19,9 +17,6 @@ class TokenModel {
 		if (xchTokenData) {
 			this.importedFromXchTokenOn = new Date();
 			this.dataIsCleanForXchToken = xchTokenData.Symbol?.length > 0;
-			this.symbol = xchTokenData.Symbol || this.symbol;
-			this.logoUrl = xchTokenData.TailLogoUrl || xchTokenData.ImageUrl || this.logoUrl;
-			this.description = xchTokenData.TailDatabaseDescription || this.description;
 			this.amountIssued = typeof xchTokenData.Amount == 'number' ? xchTokenData.Amount / 1000 : _.toNumber(xchTokenData.Amount);
 			this.issuedOn = xchTokenData.CreateTime ? new Date(_.toNumber(xchTokenData.CreateTime) * 1000) : this.issuedOn;
 			this.issuedHeight = xchTokenData.Height;
@@ -38,9 +33,6 @@ class TokenModel {
 		if (spacescanData) {
 			this.importedFromSpacescanOn = new Date();
 			this.dataIsCleanForSpacescan = spacescanData.symbol?.length > 0;
-			this.symbol = spacescanData.symbol || this.symbol;
-			this.logoUrl = spacescanData.logo && spacescanData.logo != 'https://images.spacescan.io/xch/cat/default_logo.png' ? spacescanData.logo : this.logoUrl;
-			this.description = spacescanData.description || this.description;
 			this.amountIssued = spacescanData.total_supply || this.amountIssued;
 			this.issuedOn = spacescanData.issued_time || this.issuedOn;
 			this.chiaLisp = spacescanData.lisp || this.chiaLisp;
@@ -64,13 +56,13 @@ class TokenModel {
 		return this.spacescanData?.asset_id || this.xchTokenData?.ASSET_ID || this.tailDatabaseData?.hash;
 	}
 	get Symbol() {
-		return this.symbol;
+		return this.spacescanData?.symbol || this.xchTokenData?.Symbol || this.tailDatabaseData?.code;
 	}
 	get LogoUrl() {
-		return this.logoUrl;
+		return this.spacescanData?.logo && this.spacescanData?.logo != 'https://images.spacescan.io/xch/cat/default_logo.png' ? this.spacescanData?.logo : this.xchTokenData?.ImageUrl || this.tailDatabaseData?.logo_url;
 	}
 	get Description() {
-		return this.description;
+		return this.spacescanData?.description || this.xchTokenData?.Introduction || this.tailDatabaseData?.description;
 	}
 	get AmountIssued() {
 		return this.amountIssued;

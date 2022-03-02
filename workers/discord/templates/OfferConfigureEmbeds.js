@@ -19,18 +19,18 @@ module.exports = {
 		for (let index = 0; index < offered.length || index < requested.length; index++) {
 			if (index < requested.length) {
 				const requestedCatDetail = await tc.findByTail(requested[index][0]);
-				const requestedCatMultiplier = requestedCatDetail.symbol == 'XCH' ? xchMultiplier : catMultiplier;
+				const requestedCatMultiplier = requestedCatDetail.Symbol == 'XCH' ? xchMultiplier : catMultiplier;
 				const requestedAmount = requested[index][1] / requestedCatMultiplier;
-				embed.addField(':outbox_tray: Requests', `${requestedAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${requestedCatDetail.symbol}`, true);
+				embed.addField(':outbox_tray: Requests', `${requestedAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${requestedCatDetail.Symbol}`, true);
 			}
 			else {
 				embed.addField('\u200B', '\u200B');
 			}
 			if (index < offered.length) {
 				const offeredCatDetail = await tc.findByTail(offered[index][0]);
-				const offeredCatMultiplier = offeredCatDetail.symbol == 'XCH' ? xchMultiplier : catMultiplier;
+				const offeredCatMultiplier = offeredCatDetail.Symbol == 'XCH' ? xchMultiplier : catMultiplier;
 				const offeredAmount = offered[index][1] / offeredCatMultiplier;
-				embed.addField('Offers :inbox_tray:', `${offeredAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${offeredCatDetail.symbol}`, true);
+				embed.addField('Offers :inbox_tray:', `${offeredAmount.toLocaleString(interaction.locale, formatNumberOptions)} ${offeredCatDetail.Symbol}`, true);
 			}
 			else {
 				embed.addField('\u200B', '\u200B');

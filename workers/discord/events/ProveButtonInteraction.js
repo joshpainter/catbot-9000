@@ -5,7 +5,7 @@ module.exports = {
 		try {
 			if (!interaction.isButton()) return;
 			const buttonOptions = JSON.parse(interaction.customId);
-			this.logInfo(interaction, `confirm=${buttonOptions.confirm}&cat=${buttonOptions.symbol}`);
+			this.logInfo(interaction, `confirm=${buttonOptions.confirm}&cat=${buttonOptions.Symbol}`);
 			if (buttonOptions.id == 'prove') {
 
 				// const cat = interaction.options.getString('cat');

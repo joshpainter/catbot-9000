@@ -9,7 +9,7 @@ test('fetches tokens using TokenController', async () => {
 test('fetches CATMOS token using TokenController.fetch()', async () => {
 	const tc = new TokenController();
 	const tokens = await tc.fetch();
-	const catmos = tokens.filter(token => token.symbol == 'CATMOS')[0];
+	const catmos = tokens.filter(token => token.Symbol == 'CATMOS')[0];
 	expect(catmos.Name).toBe('Catmosphere');
 });
 
