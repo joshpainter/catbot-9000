@@ -12,13 +12,14 @@ class TokenController {
 		try {
 			if (!cachedTokens || disableCache) {
 				const tokens = new Array();
-				// tokens.push({
-				// 	Name: 'Chia',
-				// 	Symbol: 'XCH',
-				// 	DisplayName: 'Chia (XCH)',
-				// 	Tail: 'XCH',
-				// 	Description: 'Digital money for a digital world.',
-				// });
+				const xchToken = new TokenModel();
+				xchToken.mergeTailDatabaseData({
+					name: 'Chia',
+					code: 'XCH',
+					hash: 'XCH',
+					description: 'Digital money for a digital world.',
+				});
+				tokens.push(xchToken);
 				const tailDbApiResults = await tailDatabaseGetTails();
 				tailDbApiResults.forEach(tailDbResult => {
 					const token = new TokenModel();

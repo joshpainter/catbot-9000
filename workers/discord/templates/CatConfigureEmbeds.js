@@ -8,14 +8,14 @@ module.exports = {
 		if (interaction.message) {
 			await interaction.message.suppressEmbeds(false);
 		}
-		const dataSummary = `Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromSpacescanOn.toLocaleString(interaction.locale, formatDateOptions)}`;
+		const dataSummary = `Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromTailDatabaseOn?.toLocaleString(interaction.locale, formatDateOptions)}`;
 		// let dataSummary = `✅ All sources agree. Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromSpacescanOn.toLocaleString(interaction.locale, formatDateOptions)}`;
 		// if (!token.importedFromTailDatabaseOn || !token.importedFromXchTokenOn || !token.importedFromSpacescanOn) {
 		// 	dataSummary = `🟥 Sources do not have complete data. Information aggregated from taildatabase.com, xchtoken.org and spacescan.io as of ${token.importedFromSpacescanOn.toLocaleString(interaction.locale, formatDateOptions)}`;
 		// }
 		const embed = new MessageEmbed();
 		embed
-			.setColor(token.ApisMissingDetails.length ? 'YELLOW' : 'GREEN')
+			.setColor(token.ApisMissingDetails?.length ? 'YELLOW' : 'GREEN')
 			.setTitle(`${token.Name} (${token.Symbol})`)
 			.setURL(`https://www.spacescan.io/xch/cat1/${token.Tail}`)
 			.setDescription(token.Description ?? 'Unknown')

@@ -68,10 +68,10 @@ module.exports = {
 				socialLinksRow2.addComponents(button);
 			}
 		}
-		if (socialLinksRow1.components.length) {
+		if (socialLinksRow1.components?.length) {
 			components.push(socialLinksRow1);
 		}
-		if (socialLinksRow2.components.length) {
+		if (socialLinksRow2.components?.length) {
 			components.push(socialLinksRow2);
 		}
 		const catApiLinksRow = new MessageActionRow();
