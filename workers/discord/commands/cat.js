@@ -27,22 +27,19 @@ module.exports = {
 			this.logInfo(interaction, 'told a (probably terrible) dad joke');
 		}
 		else {
-			const selectedToken = tokens.shift();
+			const selectedToken = tokens[0];
 			const catEmbeds = await CatConfigureEmbeds(interaction, selectedToken);
 			const catComponents = await CatConfigureComponents(interaction, selectedToken);
 			if (tokens.length > 1) {
 				const selectMenu = new MessageSelectMenu()
 					.setCustomId('select-cat')
-					.setPlaceholder(`${tokens.length} more results${tokens.length > 25 ? ', only first 25 shown' : ''}...`);
+					.setPlaceholder(`${tokens.length} results for '${query}' ${tokens.length > 25 ? ', only first 25 shown' : ''}...`);
 				for (const token of tokens) {
 					selectMenu.addOptions([
 						{
-							label: `${token.name} (${token.symbol})`,
-							// description: token.tail,
-							value: JSON.stringify({
-								search: query,
-								tail: token.tail,
-							}),
+							label: token.DisplayName.substring(0, 25),
+							description: token.Description.substring(0, 50),
+							value: token.Tail.substring(0, 100),
 						},
 					]);
 					if (selectMenu.options.length >= 25) break;
@@ -50,7 +47,7 @@ module.exports = {
 				catComponents.push(new MessageActionRow().addComponents(selectMenu));
 			}
 			await interaction.reply({
-				content:`Sifting through ${allTokens.length} CATS to find \`\`${query}\`\`, one sec...`,
+				content:`Sifted through ${allTokens.length} CATS looking for '${query}' and found ${tokens.length > 1 ? `${tokens.length} results! Use the menu below to see the other results.\n\n:scream_cat: :1234: :face_with_monocle:` : 'exactly one result!\n\n:heart_eyes_cat: :dart: :eyes:'} :point_down:`,
 				embeds:catEmbeds,
 				components:catComponents,
 			});
