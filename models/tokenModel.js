@@ -63,10 +63,10 @@ class TokenModel {
 		if (this.spacescanData?.logo && this.spacescanData?.logo != 'https://images.spacescan.io/xch/cat/default_logo.png') {
 			logoUrl = this.spacescanData.logo;
 		}
-		if (!logoUrl || (!logoUrl.toLowerCase().endsWith('.gif') && this.xchTokenData?.ImageUrl.toLowerCase().endsWith('.gif'))) {
+		if (!logoUrl || (!logoUrl.toLowerCase().endsWith('.gif') && this.xchTokenData?.ImageUrl?.toLowerCase().endsWith('.gif'))) {
 			logoUrl = this.xchTokenData?.ImageUrl;
 		}
-		if (!logoUrl || (!logoUrl.toLowerCase().endsWith('.gif') && this.tailDatabaseData?.logo_url.toLowerCase().endsWith('.gif'))) {
+		if (!logoUrl || (!logoUrl.toLowerCase().endsWith('.gif') && this.tailDatabaseData?.logo_url?.toLowerCase().endsWith('.gif'))) {
 			logoUrl = this.tailDatabaseData.logo_url;
 		}
 		return logoUrl;
