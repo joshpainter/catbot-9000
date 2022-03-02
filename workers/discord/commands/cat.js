@@ -37,9 +37,9 @@ module.exports = {
 				for (const token of tokens) {
 					selectMenu.addOptions([
 						{
-							label: token.DisplayName.substring(0, 25),
-							description: token.Description.substring(0, 50),
-							value: token.Tail.substring(0, 100),
+							label: token.DisplayName.length > 100 ? `${token.DisplayName.substring(0, 97)}...` : token.DisplayName,
+							description: token.Description.length > 100 ? `${token.Description.substring(0, 97)}...` : token.Description,
+							value: token.Tail.length > 100 ? `${token.Tail.substring(0, 97)}...` : token.Tail,
 						},
 					]);
 					if (selectMenu.options.length >= 25) break;
@@ -47,7 +47,7 @@ module.exports = {
 				catComponents.push(new MessageActionRow().addComponents(selectMenu));
 			}
 			await interaction.reply({
-				content:`Sifted through ${allTokens.length} CATS looking for '${query}' and found ${tokens.length > 1 ? `${tokens.length} results! Use the menu below to see the other results.\n\n:scream_cat: :1234: :face_with_monocle:` : 'exactly one result!\n\n:heart_eyes_cat: :dart: :eyes:'} :point_down:`,
+				content:`Sifted through ${allTokens.length} CATS looking for '${query}' and found ${tokens.length > 1 ? `${tokens.length} results! Use the menu below to see the other results.\n〰〰〰〰\n:scream_cat: :1234: :face_with_monocle:` : 'exactly one result!\n\n:heart_eyes_cat: :dart: :eyes:'} :point_down:\n〰〰〰〰`,
 				embeds:catEmbeds,
 				components:catComponents,
 			});
