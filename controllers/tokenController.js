@@ -26,7 +26,8 @@ class TokenController {
 				});
 				const xchTokenApiResults = await xchtokenGetTokenApi();
 				xchTokenApiResults.forEach(xchTokenApiResult => {
-					let token = _.find(tokens, findToken => findToken.tail == xchTokenApiResult.ASSET_ID);
+					let token = _.find(tokens, findToken => findToken.tail?.toLowerCase() == xchTokenApiResult.ASSET_ID?.toLowerCase());
+					if (!token) token = _.find(tokens, findToken => findToken.Symbol?.toLowerCase() == xchTokenApiResult.Symbol?.toLowerCase());
 					if (!token) {
 						token = new TokenModel();
 						tokens.push(token);
@@ -35,7 +36,7 @@ class TokenController {
 				});
 				const spacescanApiResults = await spacescanGetCatsApi();
 				spacescanApiResults.forEach(spacescanApiResult => {
-					let token = _.find(tokens, findToken => findToken.tail == spacescanApiResult.asset_id);
+					let token = _.find(tokens, findToken => findToken.tail?.toLowerCase() == spacescanApiResult.asset_id?.toLowerCase());
 					if (!token) {
 						token = new TokenModel();
 						tokens.push(token);
