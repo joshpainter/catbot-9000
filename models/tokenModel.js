@@ -35,25 +35,23 @@ class TokenModel {
 	mergeSpacescanData(spacescanData) {
 		if (spacescanData) {
 			this.needsSpacescanUpdate = spacescanData.symbol == null;
-			if (spacescanData.symbol != null) {
-				this.importedFromSpacescan = true;
-				this.name = spacescanData.asset_name || this.name;
-				this.tail = spacescanData.asset_id || this.tail;
-				this.symbol = spacescanData.symbol || this.symbol;
-				this.logoUrl = spacescanData.logo || this.logoUrl;
-				this.description = spacescanData.description || this.description;
-				this.amountIssued = spacescanData.total_supply || this.amountIssued;
-				this.issuedOn = spacescanData.issued_time || this.issuedOn;
-				this.chiaLisp = spacescanData.lisp || this.chiaLisp;
-				this.clvm = spacescanData.clvm || this.clvm;
-				this.priceUsd = spacescanData.price_usd;
-				this.priceXch = spacescanData.price_xch;
-				this.updatedOn = spacescanData.updated;
-				this.holders = spacescanData.holders;
-				this.tags = spacescanData.tags;
-				this.transactionCount = spacescanData.txns_count;
-				this.transactionAmount = spacescanData.txns_amount;
-			}
+			this.importedFromSpacescan = true;
+			this.name = spacescanData.asset_name || this.name;
+			this.tail = spacescanData.asset_id || this.tail;
+			this.symbol = spacescanData.symbol || this.symbol;
+			this.logoUrl = spacescanData.logo || this.logoUrl;
+			this.description = spacescanData.description || this.description;
+			this.amountIssued = spacescanData.total_supply || this.amountIssued;
+			this.issuedOn = spacescanData.issued_time || this.issuedOn;
+			this.chiaLisp = spacescanData.lisp || this.chiaLisp;
+			this.clvm = spacescanData.clvm || this.clvm;
+			this.priceUsd = spacescanData.price_usd;
+			this.priceXch = spacescanData.price_xch;
+			this.updatedOn = spacescanData.updated;
+			this.holders = spacescanData.holders;
+			this.tags = spacescanData.tags;
+			this.transactionCount = spacescanData.txns_count;
+			this.transactionAmount = spacescanData.txns_amount;
 		}
 	}
 	get DisplayName() {
