@@ -79,7 +79,7 @@ module.exports = {
 			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(`https://www.taildatabase.com/tail/${selectedToken.tail}`)
+					.setURL(`https://www.taildatabase.com/tail/${selectedToken.Tail}`)
 					.setEmoji('<:taildb:947824406284083320>')
 					.setLabel('taildatabase.com'),
 			);
@@ -88,7 +88,7 @@ module.exports = {
 			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(`https://xchtoken.org/asset_token.php?ASSET_ID=${selectedToken.tail}`)
+					.setURL(`https://xchtoken.org/asset_token.php?ASSET_ID=${selectedToken.Tail}`)
 					.setEmoji('<:xchtoken:947823964904882257>')
 					.setLabel('xchtoken.org'),
 			);
@@ -97,7 +97,7 @@ module.exports = {
 			catApiLinksRow.addComponents(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(`https://www.spacescan.io/xch/cat1/${selectedToken.tail}`)
+					.setURL(`https://www.spacescan.io/xch/cat1/${selectedToken.Tail}`)
 					.setEmoji('<:spacescan:947781625431863306>')
 					.setLabel('spacescan.io'),
 			);

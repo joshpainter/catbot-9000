@@ -16,13 +16,13 @@ module.exports = {
 		const embed = new MessageEmbed();
 		embed
 			.setColor(token.ApisMissingDetails.length ? 'YELLOW' : 'GREEN')
-			.setTitle(`${token.name} (${token.symbol})`)
-			.setURL(`https://www.spacescan.io/xch/cat1/${token.tail}`)
+			.setTitle(`${token.Name} (${token.symbol})`)
+			.setURL(`https://www.spacescan.io/xch/cat1/${token.Tail}`)
 			.setDescription(token.description ?? 'Unknown')
 			.setThumbnail(token.logoUrl)
 			.setFooter({ text: dataSummary })
 			.setFields([])
-			.addField('TAIL', token.tail ?? 'Unknown', false);
+			.addField('TAIL', token.Tail ?? 'Unknown', false);
 
 		if (token.amountIssued) {
 			embed.addField('Amount Issued', token.amountIssued?.toLocaleString(interaction.locale, formatNumberOptions) || 'Unknown', true);

@@ -18,8 +18,8 @@ module.exports = {
 				const tokens = await tc.search(query);
 				for (const token of tokens) {
 					responses.push({
-						name: token.name,
-						value: token.name,
+						name: token.Name,
+						value: token.Name,
 					});
 					if (responses.length >= 25) break;
 				}

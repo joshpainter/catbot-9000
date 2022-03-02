@@ -1,11 +1,10 @@
 const _ = require('lodash');
 class TokenModel {
 	mergeTailDatabaseData(tailDatabaseData) {
+		this.tailDatabaseData = tailDatabaseData;
 		if (tailDatabaseData) {
 			this.importedFromTailDatabaseOn = new Date();
 			this.dataIsCleanForTailDatabase = tailDatabaseData.code?.length > 0;
-			this.name = tailDatabaseData.name;
-			this.tail = tailDatabaseData.hash;
 			this.symbol = tailDatabaseData.code;
 			this.logoUrl = tailDatabaseData.logo_url;
 			this.description = tailDatabaseData.description;
@@ -14,12 +13,12 @@ class TokenModel {
 			this.clvm = tailDatabaseData.clvm;
 		}
 	}
+
 	mergeXchTokenData(xchTokenData) {
+		this.xchTokenData = xchTokenData;
 		if (xchTokenData) {
 			this.importedFromXchTokenOn = new Date();
 			this.dataIsCleanForXchToken = xchTokenData.Symbol?.length > 0;
-			this.name = xchTokenData.Name || this.name;
-			this.tail = xchTokenData.ASSET_ID || this.tail;
 			this.symbol = xchTokenData.Symbol || this.symbol;
 			this.logoUrl = xchTokenData.TailLogoUrl || xchTokenData.ImageUrl || this.logoUrl;
 			this.description = xchTokenData.TailDatabaseDescription || this.description;
@@ -35,11 +34,10 @@ class TokenModel {
 		}
 	}
 	mergeSpacescanData(spacescanData) {
+		this.spacescanData = spacescanData;
 		if (spacescanData) {
 			this.importedFromSpacescanOn = new Date();
 			this.dataIsCleanForSpacescan = spacescanData.symbol?.length > 0;
-			this.name = spacescanData.asset_name || this.name;
-			this.tail = spacescanData.asset_id || this.tail;
 			this.symbol = spacescanData.symbol || this.symbol;
 			this.logoUrl = spacescanData.logo && spacescanData.logo != 'https://images.spacescan.io/xch/cat/default_logo.png' ? spacescanData.logo : this.logoUrl;
 			this.description = spacescanData.description || this.description;
@@ -60,10 +58,10 @@ class TokenModel {
 		return `${this.Name} (${this.Symbol})`;
 	}
 	get Name() {
-		return this.name;
+		return this.spacescanData?.asset_name || this.xchTokenData?.Name || this.tailDatabaseData?.name;
 	}
 	get Tail() {
-		return this.tail;
+		return this.spacescanData?.asset_id || this.xchTokenData?.ASSET_ID || this.tailDatabaseData?.hash;
 	}
 	get Symbol() {
 		return this.symbol;
