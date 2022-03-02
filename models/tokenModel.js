@@ -59,7 +59,17 @@ class TokenModel {
 		return this.spacescanData?.symbol || this.xchTokenData?.Symbol || this.tailDatabaseData?.code;
 	}
 	get LogoUrl() {
-		return this.spacescanData?.logo && this.spacescanData?.logo != 'https://images.spacescan.io/xch/cat/default_logo.png' ? this.spacescanData?.logo : this.xchTokenData?.ImageUrl || this.tailDatabaseData?.logo_url;
+		let logoUrl = '';
+		if (this.spacescanData?.logo && this.spacescanData?.logo != 'https://images.spacescan.io/xch/cat/default_logo.png') {
+			logoUrl = this.spacescanData.logo;
+		}
+		if (!logoUrl || (!logoUrl.toLowerCase().endsWith('.gif') && this.xchTokenData?.ImageUrl.toLowerCase().endsWith('.gif'))) {
+			logoUrl = this.xchTokenData?.ImageUrl;
+		}
+		if (!logoUrl || (!logoUrl.toLowerCase().endsWith('.gif') && this.tailDatabaseData?.logo_url.toLowerCase().endsWith('.gif'))) {
+			logoUrl = this.tailDatabaseData.logo_url;
+		}
+		return logoUrl;
 	}
 	get Description() {
 		return this.spacescanData?.description || this.xchTokenData?.Introduction || this.tailDatabaseData?.description;
