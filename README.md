@@ -14,6 +14,7 @@ It uses custom client libraries for the following APIs:
 
 It also uses the following libraries:
 * For Discord integration, it uses the excellent [Discord.js](https://discord.js.org/) client library.
+* For parsing emojis from text, it uses the [emoji-translate](https://github.com/notwaldorf/emoji-translate) library.
 
 The credit behind the Chia RPC javascript library goes to [OfferPool](https://github.com/offerpool/offerpool/blob/main/backend/utils/get-offer-summary.js). This code was instrumental for me to understand how to connect securely to the RPC endpoint using the wallet's SSL certificates.
 
