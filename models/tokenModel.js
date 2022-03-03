@@ -35,6 +35,11 @@ class TokenModel {
 			this.dataIsCleanForSpacescan = spacescanData.symbol?.length > 0;
 			this.amountIssued = spacescanData.total_supply || this.amountIssued;
 			this.issuedOn = spacescanData.issued_time || this.issuedOn;
+			this.discordUrl = spacescanData.discord?.startsWith('http') ? spacescanData.discord : null;
+			this.redditUrl = spacescanData.reddit?.startsWith('http') ? spacescanData.reddit : null;
+			this.whitepaperUrl = spacescanData.whitepaper?.startsWith('http') ? spacescanData.whitepaper : null;
+			this.twitterUrl = spacescanData.twitter?.startsWith('http') ? spacescanData.twitter : null;
+			this.websiteUrl = spacescanData.website?.startsWith('http') ? spacescanData.website : null;
 			this.chiaLisp = spacescanData.lisp || this.chiaLisp;
 			this.clvm = spacescanData.clvm || this.clvm;
 			this.priceUsd = spacescanData.price_usd;

@@ -13,6 +13,15 @@ module.exports = {
 					.setLabel('Website'),
 			);
 		}
+		if (selectedToken.whitepaperUrl) {
+			buttons.push(
+				new MessageButton()
+					.setStyle('LINK')
+					.setURL(selectedToken.whitepaperUrl)
+					.setEmoji('📰')
+					.setLabel('Whitepaper'),
+			);
+		}
 		if (selectedToken.discordUrl) {
 			buttons.push(
 				new MessageButton()
@@ -61,7 +70,7 @@ module.exports = {
 		const socialLinksRow1 = new MessageActionRow();
 		const socialLinksRow2 = new MessageActionRow();
 		for (const button of buttons) {
-			if (socialLinksRow1.components.length < 3) {
+			if (socialLinksRow1.components.length < 5) {
 				socialLinksRow1.addComponents(button);
 			}
 			else {
