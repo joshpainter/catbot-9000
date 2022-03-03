@@ -4,65 +4,65 @@ module.exports = {
 	async CatConfigureComponents(interaction, selectedToken) {
 		const components = new Array();
 		const buttons = new Array();
-		if (selectedToken.websiteUrl) {
+		if (selectedToken.WebsiteUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.websiteUrl)
+					.setURL(selectedToken.WebsiteUrl)
 					.setEmoji('<:website:947778311877197844>')
 					.setLabel('Website'),
 			);
 		}
-		if (selectedToken.whitepaperUrl) {
+		if (selectedToken.WhitepaperUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.whitepaperUrl)
+					.setURL(selectedToken.WhitepaperUrl)
 					.setEmoji('📰')
 					.setLabel('Whitepaper'),
 			);
 		}
-		if (selectedToken.discordUrl) {
+		if (selectedToken.DiscordUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.discordUrl)
+					.setURL(selectedToken.DiscordUrl)
 					.setEmoji('<:discord:947777859932545044>')
 					.setLabel('Discord'),
 			);
 		}
-		if (selectedToken.twitterUrl) {
+		if (selectedToken.TwitterUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.twitterUrl)
+					.setURL(selectedToken.TwitterUrl)
 					.setEmoji('<:twitter:947777747458080788>')
 					.setLabel('Twitter'),
 			);
 		}
-		if (selectedToken.facebookUrl) {
+		if (selectedToken.FacebookUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.facebookUrl)
+					.setURL(selectedToken.FacebookUrl)
 					.setEmoji('<:facebook:947777485116956763>')
 					.setLabel('Facebook'),
 			);
 		}
-		if (selectedToken.redditUrl) {
+		if (selectedToken.RedditUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.redditUrl)
+					.setURL(selectedToken.RedditUrl)
 					.setEmoji('<:reddit:947778704778625054>')
 					.setLabel('Reddit'),
 			);
 		}
-		if (selectedToken.telegramUrl) {
+		if (selectedToken.TelegramUrl) {
 			buttons.push(
 				new MessageButton()
 					.setStyle('LINK')
-					.setURL(selectedToken.telegramUrl)
+					.setURL(selectedToken.TelegramUrl)
 					.setEmoji('<:telegram:947778739075448863>')
 					.setLabel('Telegram'),
 			);

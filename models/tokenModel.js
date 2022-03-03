@@ -6,26 +6,13 @@ class TokenModel {
 		if (tailDatabaseData) {
 			this.importedFromTailDatabaseOn = new Date();
 			this.dataIsCleanForTailDatabase = tailDatabaseData.code?.length > 0;
-			this.amountIssued = tailDatabaseData.supply;
-			this.chiaLisp = tailDatabaseData.chialisp;
-			this.clvm = tailDatabaseData.clvm;
 		}
 	}
-
 	mergeXchTokenData(xchTokenData) {
 		this.xchTokenData = xchTokenData;
 		if (xchTokenData) {
 			this.importedFromXchTokenOn = new Date();
 			this.dataIsCleanForXchToken = xchTokenData.Symbol?.length > 0;
-			this.amountIssued = typeof xchTokenData.Amount == 'number' ? xchTokenData.Amount / 1000 : _.toNumber(xchTokenData.Amount);
-			this.issuedOn = xchTokenData.CreateTime ? new Date(_.toNumber(xchTokenData.CreateTime) * 1000) : this.issuedOn;
-			this.issuedHeight = xchTokenData.Height;
-			this.discordUrl = xchTokenData.Discord?.startsWith('http') ? xchTokenData.Discord : null;
-			this.facebookUrl = xchTokenData.Facebook?.startsWith('http') ? xchTokenData.Facebook : null;
-			this.redditUrl = xchTokenData.Reddit?.startsWith('http') ? xchTokenData.Reddit : null;
-			this.telegramUrl = xchTokenData.Telegram?.startsWith('http') ? xchTokenData.Telegram : null;
-			this.twitterUrl = xchTokenData.Twitter?.startsWith('http') ? xchTokenData.Twitter : null;
-			this.websiteUrl = xchTokenData.Website?.startsWith('http') ? xchTokenData.Website : null;
 		}
 	}
 	mergeSpacescanData(spacescanData) {
@@ -33,22 +20,6 @@ class TokenModel {
 		if (spacescanData) {
 			this.importedFromSpacescanOn = new Date();
 			this.dataIsCleanForSpacescan = spacescanData.symbol?.length > 0;
-			this.amountIssued = spacescanData.total_supply || this.amountIssued;
-			this.issuedOn = spacescanData.issued_time || this.issuedOn;
-			this.discordUrl = spacescanData.discord?.startsWith('http') ? spacescanData.discord : null;
-			this.redditUrl = spacescanData.reddit?.startsWith('http') ? spacescanData.reddit : null;
-			this.whitepaperUrl = spacescanData.whitepaper?.startsWith('http') ? spacescanData.whitepaper : null;
-			this.twitterUrl = spacescanData.twitter?.startsWith('http') ? spacescanData.twitter : null;
-			this.websiteUrl = spacescanData.website?.startsWith('http') ? spacescanData.website : null;
-			this.chiaLisp = spacescanData.lisp || this.chiaLisp;
-			this.clvm = spacescanData.clvm || this.clvm;
-			this.priceUsd = spacescanData.price_usd;
-			this.priceXch = spacescanData.price_xch;
-			this.updatedOn = spacescanData.updated;
-			this.holders = spacescanData.holders;
-			this.tags = spacescanData.tags;
-			this.transactionCount = spacescanData.txns_count;
-			this.transactionAmount = spacescanData.txns_amount;
 		}
 	}
 	get DisplayName() {
@@ -84,58 +55,61 @@ class TokenModel {
 		return _.uniq(emojis);
 	}
 	get AmountIssued() {
-		return this.amountIssued;
+		return this.spacescanData.total_supply || typeof this.xchTokenData.Amount == 'number' ? this.xchTokenData.Amount / 1000 : _.toNumber(this.xchTokenData.Amount) || this.tailDatabaseData.supply;
 	}
 	get ChiaLisp() {
-		return this.chiaLisp;
+		return this.spacescanData.lisp || this.tailDatabaseData.chialisp;
 	}
 	get Clvm() {
-		return this.clvm;
+		return this.spacescanData.clvm || this.tailDatabaseData.clvm;
 	}
 	get IssuedOn() {
-		return this.issuedOn;
+		return this.spacescanData.issued_time || this.xchTokenData.CreateTime ? new Date(_.toNumber(this.xchTokenData.CreateTime) * 1000) : null;
 	}
 	get IssuedHeight() {
-		return this.issuedHeight;
+		return this.xchTokenData.Height;
 	}
 	get DiscordUrl() {
-		return this.discordUrl;
+		return this.spacescanData.discord?.startsWith('http') ? this.spacescanData.discord : this.xchTokenData.Discord?.startsWith('http') ? this.xchTokenData.Discord : null;
 	}
 	get FacebookUrl() {
-		return this.facebookUrl;
+		return this.xchTokenData.Facebook?.startsWith('http') ? this.xchTokenData.Facebook : null;
 	}
 	get RedditUrl() {
-		return this.redditUrl;
+		return this.spacescanData.reddit?.startsWith('http') ? this.spacescanData.reddit : this.xchTokenData.Reddit?.startsWith('http') ? this.xchTokenData.Reddit : null;
 	}
 	get TelegramUrl() {
-		return this.telegramUrl;
+		return this.xchTokenData.Telegram?.startsWith('http') ? this.xchTokenData.Telegram : null;
 	}
 	get TwitterUrl() {
-		return this.twitterUrl;
+		return this.spacescanData.twitter?.startsWith('http') ? this.spacescanData.twitter : this.xchTokenData.Twitter?.startsWith('http') ? this.xchTokenData.Twitter : null;
 	}
 	get WebsiteUrl() {
-		return this.websiteUrl;
+		return this.xchTokenData.Website?.startsWith('http') ? this.xchTokenData.Website : null;
+	}
+	get WhitepaperUrl() {
+		return this.spacescanData.website?.startsWith('http') ? this.spacescanData.website : this.spacescanData.whitepaper?.startsWith('http') ? this.spacescanData.whitepaper : null;
 	}
 	get PriceUsd() {
-		return this.priceUsd;
+		return this.spacescanData.price_usd;
 	}
 	get PriceXch() {
-		return this.priceXch;
+		return this.spacescanData.price_xch;
 	}
-	get UpdatedOn() {
-		return this.updatedOn;
+	get ImportedOn() {
+		return new Date(Math.max(this.importedFromTailDatabaseOn, this.importedFromXchTokenOn, this.importedFromSpacescanOn));
 	}
 	get Holders() {
-		return this.holders;
+		return this.spacescanData.holders;
 	}
 	get Tags() {
-		return this.tags;
+		return this.spacescanData.tags;
 	}
 	get TransactionCount() {
-		return this.transactionCount;
+		return this.spacescanData.txns_count;
 	}
 	get TransactionAmount() {
-		return this.transactionAmount;
+		return this.spacescanData.txns_amount;
 	}
 	get ApisMissingDetails() {
 		const apisMissingDetails = new Array();
