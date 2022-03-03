@@ -6,13 +6,13 @@ const startDiscordBot = async () => {
 	const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 	client.commands = new Collection();
-	const commandFiles = fs.readdirSync('./workers/discord/commands').filter(file => file.endsWith('.js'));
+	const commandFiles = fs.readdirSync('./catbot/workers/discord/commands').filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${file}`);
 		client.commands.set(command.data.name, command);
 	}
 
-	const eventFiles = fs.readdirSync('./workers/discord/events').filter(file => file.endsWith('.js'));
+	const eventFiles = fs.readdirSync('./catbot/workers/discord/events').filter(file => file.endsWith('.js'));
 	for (const file of eventFiles) {
 		const event = require(`./events/${file}`);
 		if (event.once) {

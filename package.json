@@ -19,7 +19,7 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "node catbot/server.js",
     "dev": "nodemon",
     "test": "jest"
   }
