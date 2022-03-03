@@ -13,10 +13,17 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_BOT_CLIENT_TOKEN);
 
+// Register commands in guild
 // rest.put(Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID, process.env.DISCORD_GUILD_ID), { body: commands })
 // 	.then(() => console.log('Successfully registered application guild commands.'))
 // 	.catch(console.error);
 
+// Clear guild commands
+// rest.put(Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID, process.env.DISCORD_GUILD_ID), { body: {} })
+// 	.then(() => console.log('Successfully registered application guild commands.'))
+// 	.catch(console.error);
+
+// Register commands globally for all guilds
 rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
