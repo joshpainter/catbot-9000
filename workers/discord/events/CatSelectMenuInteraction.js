@@ -27,7 +27,7 @@ module.exports = {
 			this.logError(interaction, error);
 			if (error.code == 50013) {
 				// Missing permissions
-				await interaction.reply({ content: 'Uh oh, catbot-9000 is missing some required permissions! Run ``/cat check`` for more details.', ephemeral: true });
+				await interaction.reply({ content: 'Uh oh, catbot-9000 is missing some required permissions! Run ``/config check permissions`` for more details.', ephemeral: true });
 			}
 			else {
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
