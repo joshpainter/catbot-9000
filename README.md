@@ -21,43 +21,51 @@ The credit behind the Chia RPC javascript library goes to [OfferPool](https://gi
 
 ```
 catbot-9000
-└─── README.md  ...................................................  You are here
-└─── app.js  ......................................................  Main bot start code    
-└─── .env.example  ................................................  copy/rename to .env and upate your settings
+└─── README.md  .......................................................  You are here
+└─── .env.example  ....................................................  copy/rename to .env and upate your settings
 │
-└─── api-clients
-|   └─── ChiaWalletRpcClient.js  ..................................  Chia Wallet RPC API
-│   └─── HashgreenClient.js  ......................................  Hashgreen API
-│   └─── ICanHazDadJokeClient.js  .................................  ICanHazDadJoke API
-│   └─── SpacescanClient.js  ......................................  Spacescan API
-│   └─── TailDatabaseClient.js  ...................................  TailDatabase API
-│   └─── XchTokenClient.js  .......................................  XchToken API
-│
-└───controllers
-|   └─── TokenController.js  ......................................  token syncing and aggregation logic
-│
-└───models
-|   └─── Token.js  ................................................  token data structures
-│
-└───workers  ......................................................  each worker is a different bot
-    └─── discord  .................................................  all logic for discord bot
-    |   └─── commands  ............................................  command interation
-    |   |   └─── Cat.js  ..........................................  handles /cat command
-    |   |   └─── Prove.js  ........................................  handles /prove command
-    |   └─── events  ..............................................  event interation
-    |   |   └─── CatAutoCompleteInteraction.js  ...................  handles autocomplete for /cat
-    |   |   └─── CatSelectMenuInteraction.js  .....................  handles select menu for /cat
-    |   |   └─── ClientReady.js  ..................................  handles main Discord client events
-    |   |   └─── CommandInteractionRouter.js  .....................  routes all command events
-    |   |   └─── ProveButtonInteraction.js  .......................  handles buttons for /prove
-    |   |   └─── UploadOfferFileMessage.js  .......................  handles offer upload messages
-    |   └─── templates  ...........................................  templates for embeds/components
-    |       └─── CatConfigureComponents.js  .......................  configures /cat components
-    |       └─── CatConfigureEmbeds.js  ...........................  configures /cat embeds
-    |       └─── OfferConfigureEmbeds.js  .........................  configures offer upload embeds
-    |   
-    └─── market-maker  ............................................  market maker bot
-        └─── MarketMakerBot.js  ...................................  all logic for market maker bot
+└─── catbot
+	└─── server.js  ...................................................  Main start code
+	|
+	└─── api-clients
+	|   └─── ChiaWalletRpcClient.js  ..................................  Chia Wallet RPC API
+	│   └─── HashgreenClient.js  ......................................  Hashgreen API
+	│   └─── ICanHazDadJokeClient.js  .................................  ICanHazDadJoke API
+	│   └─── SpacescanClient.js  ......................................  Spacescan API
+	│   └─── TailDatabaseClient.js  ...................................  TailDatabase API
+	│   └─── XchTokenClient.js  .......................................  XchToken API
+	│
+	└───controllers
+	|   └─── TokenController.js  ......................................  token syncing and aggregation logic
+	│
+	└───models
+	|   └─── Token.js  ................................................  token data structures
+	│
+	└───workers  ......................................................  each worker is a different bot
+		└─── discord  .................................................  all logic for discord bot
+		|	└─── DeployCommands.js  ...................................  deploys commands to Discord servers
+		|	└─── DiscordBot.js  .......................................  start code for Discord bot
+		|	|		
+		|   └─── commands  ............................................  command interation
+		|   |   └─── Cat.js  ..........................................  handles /cat command
+		|   |   └─── Config.js  .......................................  handles /config command
+		|   |   └─── Prove.js  ........................................  handles /prove command
+		|   |		
+		|   └─── events  ..............................................  event interation
+		|   |   └─── CatAutoCompleteInteraction.js  ...................  handles autocomplete for /cat
+		|   |   └─── CatSelectMenuInteraction.js  .....................  handles select menu for /cat
+		|   |   └─── ClientReady.js  ..................................  handles main Discord client events
+		|   |   └─── CommandInteractionRouter.js  .....................  routes all command events
+		|   |   └─── ProveButtonInteraction.js  .......................  handles buttons for /prove
+		|   |   └─── UploadOfferFileMessage.js  .......................  handles offer upload messages
+		|   |		
+		|   └─── templates  ...........................................  templates for embeds/components
+		|       └─── CatConfigureComponents.js  .......................  configures /cat components
+		|       └─── CatConfigureEmbeds.js  ...........................  configures /cat embeds
+		|       └─── OfferConfigureEmbeds.js  .........................  configures offer upload embeds
+		|   
+		└─── market-maker  ............................................  market maker bot
+			└─── MarketMakerBot.js  ...................................  all logic for market maker bot
 ```
 
 ## Usage
