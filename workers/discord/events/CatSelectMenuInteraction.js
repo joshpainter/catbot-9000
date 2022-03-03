@@ -1,4 +1,3 @@
-// const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 const { TokenController } = require('../../../controllers/TokenController');
 const { CatConfigureComponents } = require('../templates/CatConfigureComponents');
 const { CatConfigureEmbeds } = require('../templates/CatConfigureEmbeds');
@@ -19,15 +18,20 @@ module.exports = {
 				const catComponents = await CatConfigureComponents(interaction, selectedToken);
 				const selectMenuComponent = interaction.message.components.pop();
 				catComponents.push(selectMenuComponent);
-
+				await interaction.message.reactions.removeAll();
 				await interaction.update({ content: interaction.message.content, embeds: catEmbeds, components: catComponents });
 				Promise.all(selectedToken.DescriptionEmojis.map(emoji => interaction.message.react(emoji).catch(() => console.error(`emoji ${emoji} not found`))));
-
 			}
 		}
 		catch (error) {
 			this.logError(interaction, error);
-			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			if (error.code == 50013) {
+				// Missing permissions
+				await interaction.reply({ content: 'Uh oh, catbot-9000 is missing some required permissions! Run ``/cat check`` for more details.', ephemeral: true });
+			}
+			else {
+				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			}
 		}
 	},
 	logInfo: (interaction, logText) => console.info(`${interaction?.guild?.name}:${module.exports.customName}:${interaction?.customId}:INFO:> ${logText}`),
