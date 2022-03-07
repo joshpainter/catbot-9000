@@ -1,5 +1,8 @@
 {
 	"image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:16-bullseye",
 	"extensions": ["dbaeumer.vscode-eslint"],
-	"forwardPorts": [3000]
+	"forwardPorts": [3000],
+	"mounts": [
+		"source=${localEnv:USERPROFILE}\\.chia,target=/usr/local/share/.chia,type=bind,consistency=cached",
+	]	
 }
