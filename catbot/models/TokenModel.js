@@ -55,7 +55,7 @@ class TokenModel {
 		return _.uniq(emojis);
 	}
 	get AmountIssued() {
-		return this.spacescanData.total_supply || typeof this.xchTokenData.Amount == 'number' ? this.xchTokenData.Amount / 1000 : _.toNumber(this.xchTokenData.Amount) || this.tailDatabaseData.supply;
+		return this.spacescanData.total_supply || (typeof this.xchTokenData?.Amount == 'number' ? this.xchTokenData.Amount / 1000 : _.toNumber(this.xchTokenData?.Amount)) || this.tailDatabaseData.supply;
 	}
 	get ChiaLisp() {
 		return this.spacescanData.lisp || this.tailDatabaseData.chialisp;
@@ -64,31 +64,31 @@ class TokenModel {
 		return this.spacescanData.clvm || this.tailDatabaseData.clvm;
 	}
 	get IssuedOn() {
-		return this.spacescanData.issued_time || this.xchTokenData.CreateTime ? new Date(_.toNumber(this.xchTokenData.CreateTime) * 1000) : null;
+		return this.spacescanData.issued_time || (this.xchTokenData?.CreateTime ? new Date(_.toNumber(this.xchTokenData.CreateTime) * 1000) : null);
 	}
 	get IssuedHeight() {
-		return this.xchTokenData.Height;
+		return this.xchTokenData?.Height;
 	}
 	get DiscordUrl() {
-		return this.spacescanData.discord?.startsWith('http') ? this.spacescanData.discord : this.xchTokenData.Discord?.startsWith('http') ? this.xchTokenData.Discord : null;
+		return this.spacescanData.discord?.startsWith('http') ? this.spacescanData.discord : this.xchTokenData?.Discord?.startsWith('http') ? this.xchTokenData.Discord : null;
 	}
 	get FacebookUrl() {
-		return this.xchTokenData.Facebook?.startsWith('http') ? this.xchTokenData.Facebook : null;
+		return this.xchTokenData?.Facebook?.startsWith('http') ? this.xchTokenData.Facebook : null;
 	}
 	get RedditUrl() {
-		return this.spacescanData.reddit?.startsWith('http') ? this.spacescanData.reddit : this.xchTokenData.Reddit?.startsWith('http') ? this.xchTokenData.Reddit : null;
+		return this.spacescanData.reddit?.startsWith('http') ? this.spacescanData.reddit : this.xchTokenData?.Reddit?.startsWith('http') ? this.xchTokenData.Reddit : null;
 	}
 	get TelegramUrl() {
-		return this.xchTokenData.Telegram?.startsWith('http') ? this.xchTokenData.Telegram : null;
+		return this.xchTokenData?.Telegram?.startsWith('http') ? this.xchTokenData.Telegram : null;
 	}
 	get TwitterUrl() {
-		return this.spacescanData.twitter?.startsWith('http') ? this.spacescanData.twitter : this.xchTokenData.Twitter?.startsWith('http') ? this.xchTokenData.Twitter : null;
+		return this.spacescanData.twitter?.startsWith('http') ? this.spacescanData.twitter : this.xchTokenData?.Twitter?.startsWith('http') ? this.xchTokenData.Twitter : null;
 	}
 	get WebsiteUrl() {
-		return this.xchTokenData.Website?.startsWith('http') ? this.xchTokenData.Website : null;
+		return this.xchTokenData?.Website?.startsWith('http') ? this.xchTokenData.Website : null;
 	}
 	get WhitepaperUrl() {
-		return this.spacescanData.website?.startsWith('http') ? this.spacescanData.website : this.spacescanData.whitepaper?.startsWith('http') ? this.spacescanData.whitepaper : null;
+		return this.spacescanData.whitepaper?.startsWith('http') ? this.spacescanData.website : null;
 	}
 	get PriceUsd() {
 		return this.spacescanData.price_usd;
