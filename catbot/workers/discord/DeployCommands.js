@@ -4,10 +4,10 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 
 const commands = [];
-const commandFiles = fs.readdirSync('./workers/discord/commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./catbot/workers/discord/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./workers/discord/commands/${file}`);
+	const command = require(`./commands/${file}`);
 	commands.push(command.data.toJSON());
 }
 

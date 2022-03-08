@@ -22,6 +22,7 @@
   "scripts": {
     "start": "node catbot/server.js",
     "dev": "nodemon",
-    "test": "jest"
+    "test": "jest",
+	"deploy-discord-commands": "node ./catbot/workers/discord/DeployCommands.js"
   }
 }
