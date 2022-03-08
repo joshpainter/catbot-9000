@@ -1,8 +1,16 @@
 {
-	"image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:16-bullseye",
-	"extensions": ["dbaeumer.vscode-eslint"],
+	"name": "catbot-9000 & Chia full node",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "catbot",
+	"workspaceFolder": "/workspace",
+	// "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:16-bullseye",
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	],
 	"forwardPorts": [3000],
-	"mounts": [
-		"source=${localEnv:USERPROFILE}\\.chia,target=/usr/local/share/.chia,type=bind,consistency=cached",
-	]	
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "yarn install",	
+	// "mounts": [
+	// 	"source=${localEnv:USERPROFILE}\\.chia,target=/usr/local/share/.chia,type=bind,consistency=cached",
+	// ]	
 }
