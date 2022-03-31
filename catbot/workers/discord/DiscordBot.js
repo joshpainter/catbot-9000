@@ -1,9 +1,11 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
+const discordjsModal = require('discordjs-modal');
 
 const startDiscordBot = async () => {
 
 	const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+	discordjsModal(client);
 
 	client.commands = new Collection();
 	const commandFiles = fs.readdirSync('./catbot/workers/discord/commands').filter(file => file.endsWith('.js'));

@@ -6,6 +6,7 @@
     "chia-agent": "^3.0.0",
     "discord-api-types": "^0.27.2",
     "discord.js": "^13.6.0",
+    "discordjs-modal": "^1.0.10",
     "dotenv": "^16.0.0",
     "emojilib-translate": "github:joshpainter/emojilib-translate",
     "lodash": "^4.17.21",
@@ -23,6 +24,6 @@
     "start": "node catbot/server.js",
     "dev": "nodemon",
     "test": "jest",
-	"deploy-discord-commands": "node ./catbot/workers/discord/DeployCommands.js"
+    "deploy-discord-commands": "node ./catbot/workers/discord/DeployCommands.js"
   }
 }
